@@ -1,0 +1,138 @@
+<odoo>
+  <data>
+
+  <record model="ir.actions.act_window" id="accion_lista_reparaciones">
+          <field name="name">lista de servicios</field>
+          <field name="res_model">car.repair.support</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_mode">tree,form</field>
+          <field name="context">{'default_flota_cliente':active_id}</field>
+          <field name="domain">[('flota_cliente','=',active_id)]</field>
+    </record>  
+
+    <record model="ir.actions.act_window" id="accion_lista_placa">
+          <field name="name">Historial de placa</field>
+          <field name="res_model">placas.conductor</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[('auto_placa_id','=',active_id)]</field> 
+    </record>  
+
+
+  <!--FORM--> 
+  <record id="conector_interno_fleet_form_inheriti" model="ir.ui.view">
+    <field name="name">conector_interno_fleet.inheriti</field>
+    <field name="model">fleet.vehicle</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//div[@class='oe_title']" position="after">
+          <field name="img_auto" widget="image" class="oe_avatar"/>         
+      </xpath>
+
+      <xpath expr="//field[@name='residual_value']" position="after">
+        <field name="activo"/> 
+        <field name="linea"/> 
+        <field name="numero_economico"/>
+        <field name="numero_motor"/>
+        <field name="cambio_placa"/>        
+        <div class="o_row">
+          <field name="numero_placa" attrs="{'invisible': [('cambio_placa', '=', False)]}" placeholder="Nueva placa"/>  
+          <button string="Aplicar cambio" class="btn btn-primary" type="object" 
+            name="action_accept_placa" attrs="{'invisible': [('cambio_placa', '=', False)]}"/>
+        </div>         
+        <field name="danos_preexistentes"/>
+        <field name="transmission"/>
+        <field name="fuel_type"/>
+        <label for="co2"/>
+        <div class="o_row" name="co2">
+            <field name="co2"/><span>g/km</span>
+        </div>
+        <field name="horsepower"/>
+        </xpath>
+      
+      <xpath expr="//group/group[1]" position="attributes">
+        <attribute name="string">Propietario</attribute>        
+      </xpath>
+
+       <xpath expr="//field[@name='driver_id']" position="before">
+        <field name="cliente"/>
+      </xpath>
+      <xpath expr="//group/group[1]" position="attributes">
+        <attribute name="string">Propietario</attribute>        
+      </xpath>
+
+       <xpath expr="//field[@name='location']" position="after">
+            <field name="first_contract_date"/>
+            <field name="aseguradora"/>
+            <field name="poliza"/>
+            <field name="telefono_contacto"/>
+            <field name="inicio"/>
+            <field name="fin"/>
+            <field name="siniestro"/>           
+           
+      </xpath>
+
+      <xpath expr="//field[@name='vin_sn']" position="attributes">
+        <attribute name="required">1</attribute>
+      </xpath>
+
+      <xpath expr="//group/group[3]" position="replace"></xpath>
+      <xpath expr="//group/group[4]" position="replace"></xpath>
+
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button class="oe_stat_button"
+           icon="fa-list-ol"
+           help="Lista de reparaciones"
+           type="action"
+           name="%(accion_lista_reparaciones)d">
+               <field string="Recepciones"
+                name="count_reg"
+                widget="statinfo"
+                 />
+           </button>
+
+         <button class="oe_stat_button"
+           icon="fa-list-ol"
+           help="Historial de placa"
+           type="action"
+           name="%(accion_lista_placa)d">
+               <field string="Historial de Placas"
+                name="count_reg_placas"
+                widget="statinfo"
+                 />
+           </button>
+      </xpath>
+
+    </field>
+   </record>
+
+   <!--KANBAN image_128-->
+    <record id="conector_interno_fleet_kanban_inheriti" model="ir.ui.view">
+    <field name="name">conector_interno_fleet.kanban.inheriti</field>
+    <field name="model">fleet.vehicle</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_view_kanban"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@class='o_kanban_image']" position="replace">
+         <div class="o_kanban_image">
+            <img t-att-src="kanban_image('fleet.vehicle', 'img_auto', record.id.raw_value)" alt="Vehicle"/>
+        </div>
+      </xpath>
+    </field>
+   </record>
+
+   <!--BUSQUEDA-->
+    <record id="conector_interno_fleet_panel_control_inheriti" model="ir.ui.view">
+    <field name="name">conector_interno_fleet.panel_control.inheriti</field>
+    <field name="model">fleet.vehicle</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_view_search"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='name']" position="after">
+         <field string="Cliente" name="cliente"/>
+      </xpath>
+    </field>
+   </record>
+
+
+  </data>
+</odoo>

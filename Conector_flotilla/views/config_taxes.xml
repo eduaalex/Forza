@@ -1,0 +1,37 @@
+<odoo>
+	<data>
+
+        <record id="action_custom_impuestos" model="ir.actions.act_window">
+            <field name="name">Impuestos</field>
+            <field name="res_model">car_repair.tax</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+		 <menuitem 
+		 	name="Impuestos" 
+		 	id="menu_impuestos" 
+		 	parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+		 	sequence="10" 
+		 	action="action_custom_impuestos"/>
+
+
+        <record model="ir.ui.view" id="danos_impuestos_view">
+            <field name="name">danos_impuestos_view</field>
+            <field name="model">car_repair.tax</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <group>
+                        <field name="tax" placeholder="0.16"/>
+                        <field name="currency_id"/>
+                    </group>
+                   </sheet>
+                </form>
+            </field>
+        </record>
+
+	
+
+			
+	</data>
+</odoo>

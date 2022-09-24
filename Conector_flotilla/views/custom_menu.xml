@@ -1,0 +1,29 @@
+<odoo>
+	<data>
+        
+        <record id="action_custom_car_car" model="ir.actions.act_window">
+            <field name="name">Lista de Autos</field>
+            <field name="res_model">fleet.vehicle</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem 
+		 	name="Automoviles" 
+		 	id="menu_automoviles" 
+		 	parent="car_repair_maintenance_service.menu_car_product_main" 
+		 	sequence="2" 
+		 	action="action_custom_car_car"/>
+ 
+		<record id="car_repair_maintenance_service.menu_car_product_action" model="ir.ui.menu">
+		 	<field name="groups_id" eval="[(6,0,[ref('hidden_menus_car_repair')])]"/>
+		 </record>
+
+		 <record id="car_repair_maintenance_service.menu_diagnosys_action" model="ir.ui.menu">
+		 	<field name="groups_id" eval="[(6,0,[ref('hidden_menus_car_repair')])]"/>		 	
+		 </record>
+		 <record id="car_repair_maintenance_service.menu_workorder_action" model="ir.ui.menu">
+		 	<field name="groups_id" eval="[(6,0,[ref('hidden_menus_car_repair')])]"/>
+		 </record> 
+		
+	</data>
+</odoo>

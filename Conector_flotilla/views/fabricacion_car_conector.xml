@@ -1,0 +1,14 @@
+<odoo>
+	<data>
+	 <record id="custom_fabricacion_move_inheriti" model="ir.ui.view">
+    <field name="name">custom_fabricacion_move.inheriti</field>
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+    <field name="arch" type="xml">     
+      <xpath expr="//field[@name='is_produced']" position="after">
+        <field name="order_servicio"/>      
+      </xpath>
+     </field>
+   </record>
+	</data>
+</odoo>

@@ -1,0 +1,49 @@
+<odoo>
+	<data>
+
+        <record id="action_custom_resulta_chechlist" model="ir.actions.act_window">
+            <field name="name">Lista de resultados</field>
+            <field name="res_model">check_result.list</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+		 <menuitem 
+		 	name="Respuestas Listas de entrega" 
+		 	id="menu_resulta_chechlist" 
+		 	parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+		 	sequence="12" 
+		 	action="action_custom_resulta_chechlist"/>
+
+
+        <record model="ir.ui.view" id="resulta_chechlist_form_view">
+            <field name="name">resulta_chechlist_form_view</field>
+            <field name="model">check_result.list</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="icon_name" widget="image"/>
+                    </group>
+                   </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="resulta_chechlist_tree_view">
+            <field name="name">resulta_chechlist_tree_view</field>
+            <field name="model">check_result.list</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                  <field name="icon_name" widget="image"/>                   
+                   
+                </tree>
+            </field>
+        </record>
+
+	
+
+			
+	</data>
+</odoo>

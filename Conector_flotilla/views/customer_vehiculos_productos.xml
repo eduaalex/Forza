@@ -1,0 +1,30 @@
+<odoo>
+	<data>
+	 <record id="custom_vehiculos_form_inheriti" model="ir.ui.view">
+    <field name="name">custom_vehiculos_form.inheriti</field>
+    <field name="model">fleet.vehicle.model</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_tree"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='name']" position="after">
+        <field name="producto_servicio" widget="many2many_tags"/>    
+      </xpath>     
+      </field>
+   </record>
+
+
+   <record id="custom_vehiculos_tree_inheriti" model="ir.ui.view">
+    <field name="name">custom_vehiculos_tree.inheriti</field>
+    <field name="model">fleet.vehicle.model</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook/page[@name='vendors']" position="after">
+        <page string="Productos o Servicios">
+        	<group>
+        		<field name="producto_servicio" widget="many2many_tags"/>
+        	</group>
+        </page>
+      </xpath>     
+      </field>
+   </record>
+	</data>
+</odoo>

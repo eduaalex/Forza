@@ -1,0 +1,50 @@
+<odoo>
+  <data>
+
+  <record id="cotisador_interno_ventas_inheriti" model="ir.ui.view">
+    <field name="name">cotisador_interno_venta.inheriti</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//field[@name='name']" position="after">
+          <group><field name="field_filter"  string="Búsqueda rápida"/></group>
+      </xpath>
+
+      <xpath expr="//field[@name='client_order_ref']" position="before">
+        <field name="repair_origin_id"/>        
+      </xpath>
+
+      <xpath expr="//field[@name='validity_date']" position="before">
+        <field name="fecha_entrega"/>
+      </xpath>
+      
+      <xpath expr="//field[@name='partner_id']" position="after">
+      <field name="flota_cliente"/>
+      <field name="order_creada"  invisible="1"/>
+      <!-- <field name="diagno_creada" invisible="1"/> -->
+      <field name="motivo" options="{'no_create': True, 'no_create_edit':True}"/>
+     
+      </xpath>
+
+      <xpath expr="//field[@name='payment_term_id']" position="after">
+        <field name="numero_serie" readonly="1" force_save="1"/>
+        <field name="odometroactual"/>
+        <field name="atendio_id" readonly="1" force_save="1"/>
+      </xpath>  
+
+
+      <!-- <xpath expr="//button[@name='payment_action_void']" position="after">
+        <button name="create_invoice_local"  type="object" string="Crear Factura"/>
+      </xpath>    --> 
+
+      <!--  <xpath expr="//field[@name='order_line']" position="attributes">
+        <attribute name="readonly">[('repair_origin_id','=',True)]</attribute>
+      </xpath> -->
+
+      
+
+    </field>
+   </record>
+  </data>
+</odoo>

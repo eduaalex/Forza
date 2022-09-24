@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="etapa_new" model="etapas.reparacion">
+            <field name="name">Recepción de vehículo</field>
+            <field name="value">new</field>
+            <field name="activa">True</field>
+        </record>
+
+         <record id="etapa_assigned" model="etapas.reparacion">
+            <field name="name">Asignado</field>
+            <field name="value">assigned</field>
+            <field name="activa">True</field>
+        </record>
+
+        <record id="etapa_diagnostico" model="etapas.reparacion">
+            <field name="name">Diagnostico</field>
+            <field name="value">diagnosis</field>
+            <field name="activa">True</field>
+        </record>
+
+        <record id="etapa_work_in_progres" model="etapas.reparacion">
+            <field name="name">Trabajo en proceso</field>
+            <field name="value">work_in_progress</field>
+            <field name="activa">True</field>
+        </record>
+
+        <record id="etapa_lista_para_entrega" model="etapas.reparacion">
+            <field name="name">Listo para entrega</field>
+            <field name="value">Listo_para_entrega</field>
+            <field name="activa">True</field>
+        </record>
+
+        <record id="etapa_closes" model="etapas.reparacion">
+            <field name="name">Cerrado</field>
+            <field name="value">closed</field>
+            <field name="activa">True</field>
+        </record>
+
+        
+
+        
+        
+    </data>
+</odoo>

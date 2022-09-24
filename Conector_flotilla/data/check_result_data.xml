@@ -1,0 +1,20 @@
+<odoo>
+	<data noupdate="1">
+		<record id="resultrb" model="check_result.list">
+            <field name="name">Revisado y Bien</field> 
+            
+        </record>
+        <record id="resultpp" model="check_result.list">
+            <field name="name">Puede Requerir Atención Pronto</field>           
+        </record>
+        <record id="resultri" model="check_result.list">
+            <field name="name">Requiere Atención Inmediata</field>           
+        </record>
+        <record id="resultni" model="check_result.list">
+            <field name="name">No Inspeccionado</field>           
+        </record>
+      
+	</data>
+</odoo>
+
+

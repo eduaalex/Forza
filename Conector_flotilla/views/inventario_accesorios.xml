@@ -1,0 +1,32 @@
+<odoo>
+	<data>
+
+        <record id="action_custom_accesorios" model="ir.actions.act_window">
+            <field name="name">Lista de accesorios</field>
+            <field name="res_model">inventario.accesorios</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+		 <menuitem 
+		 	name="Accesorios" 
+		 	id="menu_accesorios" 
+		 	parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+		 	sequence="5" 
+		 	action="action_custom_accesorios"/>
+
+
+        <record model="ir.ui.view" id="accesorios_tree_view">
+            <field name="name">accesorios_tree_view</field>
+            <field name="model">inventario.accesorios</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" create="1" edit="1">
+                    <field name="accesorio"/>                
+                </tree>
+            </field>
+        </record>
+
+
+		  
+		
+	</data>
+</odoo>

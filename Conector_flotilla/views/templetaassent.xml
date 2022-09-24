@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="inherit_calculadora_frontend" name="web_calculadora assets"  inherit_id="website.assets_frontend">
+    <xpath expr="script[last()]" position="after">
+         <script type="text/javascript" src="/Conector_flotilla/static/src/js/mainjs.js"/>         
+    </xpath>
+    <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/Conector_flotilla/static/src/css/stylos.css"/>
+    </xpath>     
+</template>
+</odoo>

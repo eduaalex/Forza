@@ -1,0 +1,32 @@
+<odoo>
+	<data>
+
+        <record id="action_custom_componentes" model="ir.actions.act_window">
+            <field name="name">Lista de componentes</field>
+            <field name="res_model">inventariocomponentes.mecanicos</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+		 <menuitem 
+		 	name="Componentes" 
+		 	id="menu_componentes" 
+		 	parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+		 	sequence="5" 
+		 	action="action_custom_componentes"/>
+
+
+        <record model="ir.ui.view" id="componentes_tree_view">
+            <field name="name">componentes_tree_view</field>
+            <field name="model">inventariocomponentes.mecanicos</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" create="1" edit="1">
+                    <field name="componente"/>                
+                </tree>
+            </field>
+        </record>
+
+
+		  
+		
+	</data>
+</odoo>

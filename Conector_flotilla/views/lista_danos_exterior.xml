@@ -1,0 +1,34 @@
+<odoo>
+	<data>
+
+        <record id="action_custom_listadanosexterior" model="ir.actions.act_window">
+            <field name="name">Lista de daños externos</field>
+            <field name="res_model">danos.exteriores</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+		 <menuitem 
+		 	name="Daños del exterior" 
+		 	id="menu_exterior" 
+		 	parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+		 	sequence="5" 
+		 	action="action_custom_listadanosexterior"/>
+
+
+        <record model="ir.ui.view" id="danos_exteriores_tree_view">
+            <field name="name">danos_exteriores_tree_view</field>
+            <field name="model">danos.exteriores</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" create="1" edit="1">
+                    <field name="danos"/>
+                    <field name="productos_id" widget="many2many_tags"/>
+                
+                </tree>
+            </field>
+        </record>
+
+
+		  
+		
+	</data>
+</odoo>

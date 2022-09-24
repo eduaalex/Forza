@@ -1,0 +1,103 @@
+<odoo>
+	<data>
+		<record id="adjuntos_credencial_move_inheriti" model="ir.ui.view">
+    <field name="name">adjuntos_credencial_move.inheriti</field>
+    <field name="model">fleet.vehicle.assignation.log</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_assignation_log_view_list"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='driver_id']" position="after">
+        <field name="Credencia"/>
+        <field name="Imagen_credencia"/>
+      </xpath>
+    </field>
+   </record>
+
+
+   <record id="fleet_servicio_log_inheriti" model="ir.ui.view">
+    <field name="name">fleet servicio log.inheriti</field>
+    <field name="model">fleet.vehicle.log.services</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_services_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='amount']" position="after">
+        <field name="orden_servicio"/>
+      </xpath>
+    </field>
+   </record>
+
+
+    <record id="fleet_car_repair_type_form_inheriti" model="ir.ui.view">
+    <field name="name">car_repair_type_form.inheriti</field>
+    <field name="model">car.repair.type</field>
+    <field name="inherit_id" ref="car_repair_maintenance_service.repair_type_car_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='code']" position="after">
+        <field name="servicio_flota"/>
+      </xpath>
+    </field>
+   </record>
+
+    <record id="fleet_car_repair_type_tree_inheriti" model="ir.ui.view">
+    <field name="name">car_repair_type_tree.inheriti</field>
+    <field name="model">car.repair.type</field>
+    <field name="inherit_id" ref="car_repair_maintenance_service.repair_type_car_tree_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='code']" position="after">
+        <field name="servicio_flota"/>
+      </xpath>
+    </field>
+   </record>
+
+
+    <record id="fleet_car_service_nature_form_inheriti" model="ir.ui.view">
+    <field name="name">car_service_nature_form.inheriti</field>
+    <field name="model">car.service.nature</field>
+    <field name="inherit_id" ref="car_repair_maintenance_service.nature_of_service_car_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='name']" position="after">
+        <field name="suma_productos" readonly="1" force_save="1" widget="monetary" 
+                        options="{'currency_field': 'currency_id'}"/>
+        <field name="currency_id" invisible="1"/>
+        <field name="is_product" invisible="1"/>
+        <button string="Enviar a productos" class="btn btn-link" type="object"
+        attrs="{'invisible':[('is_product','=',True)]}"  name="crear_producto"/>
+
+      </xpath>
+      <xpath expr="//sheet" position="inside">
+        <notebook>
+            <page string="Productos o Servicios">
+              <field name="tablas_de_producto" nolabel="1">
+                  <tree editable="bottom">
+                      <field name="productoservicio_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                      <field name="cantidad"/>
+                      <field name="costo" readonly="1" force_save="1" widget="monetary" 
+                        options="{'currency_field': 'currency_id'}"/>
+                      <field name="unidades" readonly="1" force_save="1"/>
+                      <field name="produto_relacion" invisible="1"/>
+                      <field name="currency_id" invisible="1"/>                  
+                  </tree>
+              </field>
+            </page>
+        </notebook>
+      </xpath>
+     
+    </field>
+   </record>
+
+
+   <record id="fleet_car_service_nature_tree_inheriti" model="ir.ui.view">
+    <field name="name">car_service_nature_tree.inheriti</field>
+    <field name="model">car.service.nature</field>
+    <field name="inherit_id" 
+      ref="car_repair_maintenance_service.nature_of_service_car_tree_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='name']" position="after">
+          <field name="suma_productos" readonly="1" force_save="1" widget="monetary" 
+                        options="{'currency_field': 'currency_id'}"/>
+          <field name="currency_id" invisible="1"/>
+      </xpath>   
+     
+    </field>
+   </record>
+
+	</data>
+</odoo>

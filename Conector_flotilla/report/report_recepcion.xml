@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<report
+            id="print_custom_request_car_recepcion" 
+            model="car.repair.support"
+            report_type="qweb-pdf"
+            string="Reporte Recepcion"
+            name="Conector_flotilla.custom_report_car_repair_recepcion"
+            file="Conector_flotilla.custom_report_car_repair_recepcion"
+           
+         />
+
+         <template id="custom_report_car_repair_recepcion">
+         	<t t-foreach="docs" t-as="doc">
+         		<t t-call="web.html_container">
+         			<t t-call="web.external_layout">
+
+                        <style>
+                            strong, span, p{
+                                font-size: 14px !important;
+                            }
+                            .datos-inicio{
+                                position: absolute;
+                                top: 0;
+                            }
+
+                            .qr{
+                                width: 100px !important;
+                                padding: 8px;
+                                position: absolute;
+                                right: 0;
+                                border-radius: 12px;
+                                background: #bb112b !important;
+                            }
+                            .qr img{
+                                width: 100% !important;
+                                border-radius: 12px;
+                                margin-bottom: 8px;
+                            }
+                            .qr p{
+                                color: #2f2f2f;
+                                text-align: center;
+                                font-size: 12px;
+                            }
+                            .company{
+                                margin-top: 5.5% !important;
+                            }
+                            .seccion{
+                                text-align: left !important;
+                                padding: 0px;
+                                width: 100%;
+                                background: #0d3c8f;
+                                color: #f2f2f2 !important;
+                            }
+                            .company h2{
+                                font-size: 18px !important;
+                            }
+
+                            .company-data, .interior_exterior{
+                                padding: 8px;
+                                width: 100% !important;
+                                border: 1px solid #d9d9d9 !important;
+                                border-radius: 4px !important;
+                                margin-bottom: 25px;
+                                background: #f7f7f7;
+                                -webkit-box-shadow: inset 0px 0px 15px -11px #000000; 
+                                box-shadow: inset 0px 0px 15px -11px #000000;
+                            }
+                            .company-data-1{
+                                width: 88% !important;
+                            }
+                            center, h5{
+                                font-size: 18px !important;
+                            }
+                            .inventario div{
+                                width: 40% !important;
+                            }
+                            .tabla{
+                                position: absolute !important;
+                                top: 1400px;
+                            }
+                            .info-auto strong{
+                                border-bottom: 1px solid #f7f7f7 !important;
+                            }
+                            .danos{
+                                padding: 10px !important;
+                                color: #0d3c8f;
+                                font-size: 18px !important;
+                                width: 100%;
+                                border-bottom: 1px solid #d9d9d9;
+                            }
+                            .tabla-ds{
+                                position: absolute;
+                                top: 1060px;
+
+                            }
+                        </style>
+                        
+                        <div style="float: right;" class="datos-inicio">
+                                <strong><span t-esc="doc.name"/><br/></strong>
+                                <strong>Fecha registro: </strong>                                
+                                <span t-field="doc.request_date" t-esc="context_timestamp(doc.request_date).strftime('%d-%m-%Y %H:%M')"/>
+                                <br/>
+                                <strong>Fecha entrega: </strong>
+                                <span t-field="doc.fecha_entrega" t-esc="context_timestamp(doc.fecha_entrega).strftime('%d-%m-%Y %H:%M')"/>                                  
+                                <br/>
+                                <strong>Técnico asignado: </strong><span t-esc="doc.user_id.name"/><br/>
+                            </div>
+                        <br/><br/>
+                        <div class="row company">
+                                <div class="col-6"><h2><t t-esc="doc.partner_id.name"/></h2></div>
+                                <div class="col-6">                                    
+                                </div>
+                        </div>
+                        <div class="qr">
+                            <img t-att-src="'data:image/png;base64,%s' % to_text(doc.qr_code)"/>
+                            <!-- <br/> -->
+                            <!-- <p>Seguimiento de tu servicio</p> -->
+                        </div>   
+         				<div class="row company-data company-data-1">
+                            
+                            <div class="col-4">
+                                 
+                                <span t-if="doc.partner_id.street" t-field="doc.partner_id.street"/>
+                                <span t-if="doc.partner_id.street2" t-field="doc.partner_id.street2"/>
+                                <span t-if="doc.partner_id.city" t-field="doc.partner_id.city"/>
+                                <span t-if="doc.partner_id.state_id" t-field="doc.partner_id.state_id.name"/>
+                                <span t-if="doc.partner_id.country_id" t-field="doc.partner_id.country_id.name"/>
+                                <span t-if="doc.partner_id.vat" t-field="doc.partner_id.vat"/>
+                                
+                            </div>
+                            <div class="col-4">
+                                <strong>Teléfono: </strong><span t-if="doc.partner_id.phone" t-field="doc.partner_id.phone"/><br/>
+                                <strong>Correo: </strong><span t-if="doc.partner_id.email" t-field="doc.partner_id.email"/><br/>
+                            </div>                         
+                        </div>
+                        <center class="seccion" style="color:blue;">Información del automóvil</center>
+                        <div class="row company-data info-auto">                            
+                            <div class="col-6">
+                                <strong>Marca: </strong><span t-if="doc.flota_cliente.model_id.brand_id.name" 
+                                t-field="doc.flota_cliente.model_id.brand_id.name"/><br/>
+                                <strong>Año: </strong><span t-if="doc.year" t-field="doc.year"/><br/>
+                                <strong>Modelo: </strong><span t-if="doc.flota_cliente.model_id.name" 
+                                t-field="doc.flota_cliente.model_id.name"/><br/>
+                                <strong>Color: </strong><span t-if="doc.color" t-field="doc.color"/><br/>
+                                <strong>Placa: </strong><span t-if="doc.placa" t-field="doc.placa"/><br/>
+                                <strong>Número de serie: </strong><span t-if="doc.numero_serie" t-field="doc.numero_serie"/><br/>
+                                <strong>Número económico: </strong><span t-if="doc.numero_economico" t-field="doc.numero_economico"/><br/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Categoria: </strong><br/>
+                                <span t-foreach="doc.categoria_ids" t-as="o">
+                                   <t  t-esc="o.name"/>
+                                 </span><br/>
+                                <strong>Tipo de transmisíon: </strong><span t-esc="doc.transmision"></span> <br/>
+                                <strong>Ultimo Odómetro: </strong>
+                                <span 
+                                    t-if="doc.kilometraje"
+                                    t-options='{"widget": "float", "precision": 0}' 
+                                    t-esc="doc.kilometraje">KM</span><br/>
+                                <strong>Tipo de motor: </strong><span t-esc="doc.tipo_motor"></span><br/>
+                                <strong>Numero de motor:</strong> <span t-esc="doc.numer_motor"></span><br/>
+                                <strong>Daño pre-existente: </strong><span t-esc="doc.damage"></span><br/>
+                            </div>
+                            
+                        </div>
+                        <center class="seccion" style="color:blue;">Recepción de Vehículo</center>
+                        <div class="row company-data">                            
+                            <div class="col-6">
+                                <strong style="text-align: center"> Naturaleza de servicio: </strong> 
+                                <span t-esc="doc.nature_of_service_id.name"></span> <br/>
+                                <strong>Prioridad: </strong>
+                                <t t-if="doc.priority=='0'">
+                                  <span>Baja</span>  
+                                </t>
+                                <t t-if="doc.priority=='1'">
+                                  <span>Media</span>  
+                                </t>
+                                <t t-if="doc.priority=='2'">
+                                  <span>Alta</span>  
+                                </t>
+                                <br/>
+                                <strong>Cometario recepción: </strong>
+                                <span t-esc="doc.comentario_recepcion"></span>
+                                <!-- <strong>Articulos de acompañamiento:</strong><span t-esc="doc.articulo_valor"></span><br/> -->
+                            </div>
+                            <div class="col-6">
+                                <strong>Combustible: </strong><span t-esc="doc.combutible_tanque"></span> <br/>
+                                <strong>Problema reportado: </strong><span t-esc="doc.problem"></span><br/>
+                                <strong>Kilometraje actual: </strong>
+                                  <span t-if="doc.odometro_actual"
+                                        t-options='{"widget": "float", "precision": 0}' 
+                                        t-esc="doc.odometro_actual">KM</span><br/>
+                            </div>
+                        </div>
+                        <div class="row company-data">
+                            <div class="col-6">
+                                <h5 style="color:blue;">Inventario de accesorios</h5>
+                                <div t-foreach="doc.inv_accesorios_id" t-as="o">
+                                   <span><t t-esc="o.accesorio"/></span>
+                                </div>
+                                <div>
+                                   <t t-esc="doc.articulo_valor"/>
+                                </div>
+                            </div>
+                            
+                            <div class="col-6 inventario">
+                                <h5 style="color:blue;">Inventario de componentes mecánicos</h5>
+                                <div t-foreach="doc.inv_com_mecanicos_id" t-as="o">
+                                    <span><t t-esc="o.componente"/></span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <p style="page-break-before:always;"> </p> 
+                        <br/><br/> 
+                        <div class="row tabla-ds interior_exterior">
+                            <div class="col-6"> 
+                                <center><h5 class="danos"><strong>Daños Interior</strong></h5></center>
+                                <div t-foreach="doc.lista_danos_internos_ids" t-as="o">
+                                   <span><t t-esc="o.danos_interior_id.danos"/></span>
+                                </div>
+                                <strong>Daños encontrados</strong>
+                                <div>
+                                   <span><t t-esc="doc.danos_encontrados_internos"/></span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <center><h5 class="danos"><strong>Daños Exterior</strong></h5></center>
+                                <div t-foreach="doc.lista_danos_externos_ids" t-as="o">
+                                   <span><t t-esc="o.danos_exterior_id.danos"/></span>
+                                </div>
+                                <strong>Daños encontrados</strong>
+                                <div>
+                                    <span><t t-esc="doc.danos_encontrados_externos"/></span>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    <div class="tabla">
+                        <p style="page-break-before:always;"> </p> 
+                        <center>PRESUPUESTO</center>
+                        <div class="row">
+                             <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Unidad</th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr t-foreach="doc.cosume_part_ids" t-as="o">
+                                        <td>
+                                            <t t-if="o.product_id">
+                                            <t t-esc="o.product_id.name"/>
+                                        </t>
+                                        </td>
+                                        <td>
+                                            <t t-if="o.qty">
+                                            <t t-esc="o.qty"/>
+                                        </t>
+                                        </td>                                        
+                                        <td>
+                                            <span t-if="o.costo" t-field="o.costo" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="o.product_uom">
+                                            <t t-esc="o.product_uom.name"/>
+                                        </t>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <t style="text-align: justify !important;" t-if="doc.clausula"  t-esc="doc.clausula"/>
+                            </div>
+                            <div class="col-4">
+                                <table class="table">
+                                    <tbody style="text-align: right;">
+                                        <tr>
+                                        <td>Base Impuestos:
+                                            <span t-if="doc.base_imponible" t-field="doc.base_imponible" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
+                                         </td>
+                                        </tr>
+                                        <tr>
+                                        <td>Impuesto: 
+                                             <span t-if="doc.impuestos" t-field="doc.impuestos" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>   
+                                         </td>
+                                        </tr>
+                                        <tr>
+                                        <td>Total: 
+                                            <span t-if="doc.total" t-field="doc.total" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>  
+                                        </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                          <br/>
+                        <br/>
+                        <br/>
+                        <style>
+                              .firma{ width: 100% !important; 
+                              height: 1px !important; 
+                              background: black !important; 
+                              position: absolute !important;  
+                              top: 10% !important;}
+
+                        </style>
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="firma"></div>                               
+                               <center>Firma del Prestador de Servicio</center>
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="col-5">
+                                <div class="firma"></div>  
+                               <center>Nombre y firma del consumidor</center>
+                            </div>                            
+                         </div>
+                </div>
+
+
+
+         			</t>
+         		</t>         		
+         	</t>
+         </template>
+		
+	</data>
+</odoo>

@@ -1,0 +1,36 @@
+<odoo>
+	<data>
+
+        <record id="action_custom_clausulas" model="ir.actions.act_window">
+            <field name="name">Clausula</field>
+            <field name="res_model">car_repair.clausula</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+		 <menuitem 
+		 	name="Clausula" 
+		 	id="menu_clasusula" 
+		 	parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+		 	sequence="11" 
+		 	action="action_custom_clausulas"/>
+
+
+        <record model="ir.ui.view" id="conector_clausulas_view">
+            <field name="name">clausulas_view</field>
+            <field name="model">car_repair.clausula</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <group>                        
+                        <field name="clausula"/>
+                    </group>
+                   </sheet>
+                </form>
+            </field>
+        </record>
+
+	
+
+			
+	</data>
+</odoo>

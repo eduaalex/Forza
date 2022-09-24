@@ -1,0 +1,100 @@
+<odoo>
+	<data> 
+
+        <record id="action_custom_respuestas_listas" model="ir.actions.act_window">
+            <field name="name">Líquidos y Fluidos</field>
+            <field name="res_model">liquido.fluido</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+        <menuitem 
+            name="Líquidos y Fluidos" 
+            id="menu_main_liquido_fluido_listas" 
+            parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+            sequence="5" 
+            action="action_custom_respuestas_listas"/>
+
+        <record id="action_custom_luces_listas" model="ir.actions.act_window">
+            <field name="name">Luces</field>
+            <field name="res_model">luces</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+        <menuitem 
+            name="Luces" 
+            id="menu_main_luces_listas" 
+            parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+            sequence="5" 
+            action="action_custom_luces_listas"/>
+
+        <record id="action_custom_inspeciones_vis_funcion" model="ir.actions.act_window">
+            <field name="name">Inspecion de visible de funciones</field>
+            <field name="res_model">inspeciones.vis_funcion</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+        <menuitem 
+            name="" 
+            id="menu_main_inspeciones_vis_func" 
+            parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+            sequence="5" 
+            action="action_custom_inspeciones_vis_funcion"/>
+
+        <record id="action_custom_neumaticos_frenos_delante_de" model="ir.actions.act_window">
+            <field name="name">Neumáticos y Frenos delantero Derecho</field>
+            <field name="res_model">neumaticos.frenos_delante_de</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+        <menuitem 
+            name="" 
+            id="menu_main_neumaticos_frenos_delante_de" 
+            parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+            sequence="5" 
+            action="action_custom_neumaticos_frenos_delante_de"/>
+
+
+        <record id="action_custom_neumaticos_frenos_delante_izq" model="ir.actions.act_window">
+            <field name="name">Neumáticos y Frenos delantero Izquierdo</field>
+            <field name="res_model">neumaticos.frenos_delante_izq</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+        <menuitem 
+            name="" 
+            id="menu_main_neumaticos_frenos_delante_izq" 
+            parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+            sequence="5" 
+            action="action_custom_neumaticos_frenos_delante_izq"/>
+
+
+        <record id="action_custom_neumaticos_frenos_trasero_der" model="ir.actions.act_window">
+            <field name="name">Neumáticos y Frenos Trasero Derecho</field>
+            <field name="res_model">neumaticos.frenos_trasero_der</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+        <menuitem 
+            name="" 
+            id="menu_main_neumaticos_frenos_trasero_der" 
+            parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+            sequence="5" 
+            action="action_custom_neumaticos_frenos_trasero_der"/>
+
+        <record id="action_custom_neumaticos_frenos_trasero_izq" model="ir.actions.act_window">
+            <field name="name">Neumáticos y Frenos Trasero Izquierdo</field>
+            <field name="res_model">neumaticos.frenos_trasero_izq</field>
+            <field name="view_mode">tree,form</field>
+        </record>  
+
+        <menuitem 
+            name="" 
+            id="menu_main_neumaticos_frenos_trasero_izq" 
+            parent="car_repair_maintenance_service.menu_car_repair_configuration" 
+            sequence="5" 
+            action="action_custom_neumaticos_frenos_trasero_izq"/>
+
+
+	
+	</data>
+</odoo>

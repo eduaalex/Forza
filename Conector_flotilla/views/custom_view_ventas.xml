@@ -1,0 +1,17 @@
+<odoo>
+	<data>
+		 
+    <record id="custom_view_ventas_list_inheriti" model="ir.ui.view">
+    <field name="name">custom_view_ventas_list.inheriti</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_quotation_tree"/>
+    <field name="arch" type="xml">      
+       <xpath expr="//field[@name='commitment_date']" position="replace">
+        <field name="fecha_entrega"/>
+        </xpath>
+        <xpath expr="//field[@name='expected_date']" position="replace">
+        </xpath>
+    </field>
+   </record>
+	</data>
+</odoo>

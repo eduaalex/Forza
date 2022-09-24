@@ -1,0 +1,12 @@
+<odoo>
+	<data noupdate="1">
+		<record id="clausula_inicial" model="car_repair.clausula">
+           <field name="clausula">
+            	En caso de que el presupuesto no sea aceptado, el consumidor pagará
+				exclusivamente el costo por la revisión y diagnostico y el prestador del
+				servicio se obliga a devolver el vehículo en las condiciones en las que fue
+				entregado, exceptuando las consecuencias inevitables del diagnostico.
+            </field>
+        </record>
+	</data>
+</odoo>

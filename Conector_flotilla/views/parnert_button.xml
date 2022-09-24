@@ -1,0 +1,47 @@
+<odoo>
+  <data>
+    <record model="ir.actions.act_window" id="accion_historial_flotilla">
+          <field name="name">Historial de autos</field>
+          <field name="res_model">fleet.vehicle</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_mode">tree,form</field>
+          <field name="context">{'default_cliente':active_id}</field>
+          <field name="domain">[('cliente','=',active_id)]</field>
+    </record>
+
+
+  <record id="flotilla_partner_id_inheriti" model="ir.ui.view">
+    <field name="name">flottilla partner id.inheriti</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button class="oe_stat_button"
+           icon="fa-list-ol"
+           help="Historial de autos por usuario"
+           type="action"
+           name="%(accion_historial_flotilla)d">
+               <field string="Autos"
+                name="count_reg"
+                widget="statinfo"
+                 />
+           </button>
+      </xpath>
+
+      <xpath expr="//field[@name='vat']" position="after">
+        <field name="dueno_autos"/>
+        <field name="es_conductor"/>
+        <field name="is_porta_check" invisible="1"/>
+        <field name="is_password_check" invisible="1"/>
+        <button name="portal_dueno_autos" string="Permiso a Portal"  type="object" class="btn btn-link" 
+          attrs="{'invisible':[('is_porta_check','=',True)]}"/>
+        <button name="change_password" string="Contraseña"  type="object" class="btn btn-link" 
+          attrs="{'invisible':[('is_password_check','=',True)]}"/>       
+
+      </xpath>
+
+
+    </field>
+   </record>
+  </data>
+</odoo>

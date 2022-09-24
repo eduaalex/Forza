@@ -1,0 +1,1761 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* car_repair_maintenance_service
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-31 06:17+0000\n"
+"PO-Revision-Date: 2020-08-31 06:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: car_repair_maintenance_service
+#: model:mail.template,body_html:car_repair_maintenance_service.email_template_car_ticket1
+msgid ""
+"\n"
+"            \n"
+"<p>Dear ${object.partner_id.name},\n"
+"\n"
+"% set access_action = object.get_access_action()\n"
+"% set access_url = access_action['type'] == 'ir.actions.act_url' and access_action['url'] or '/car_repair_email/feedback/'+str(object.id)\n"
+"% set is_online = access_action and access_action['type'] == 'ir.actions.act_url'\n"
+"\n"
+"<p>We have closed your ticket for now, if you want to reopen please do not hesitate contact us.\n"
+"\n"
+"<p><a style=\"padding: 8px 30px 8px 30px;border-radius: 6px;border: 1px solid #CCCCCC;background:#008080;margin-left: 2px;text-decoration: none;color:#FFFFFF;\" href=\"${access_url}\">Please give your feedback</a>\n"
+"<p>Thanks for your participation!     \n"
+"<p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
+"           <br/>\n"
+"           <div style=\"width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"       <h3 style=\"margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;\">\n"
+"           <strong style=\"text-transform:uppercase;\">${object.company_id.name}</strong></h3>\n"
+"   </div>\n"
+"   <div style=\"width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;\">\n"
+"       <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
+"           ${object.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}\n"
+"       </span>\n"
+"       % if object.company_id.phone:\n"
+"           <div style=\"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
+"               Phone:&nbsp; ${object.company_id.phone}\n"
+"           </div>\n"
+"       % endif\n"
+"       % if object.company_id.website:\n"
+"           <div>\n"
+"               Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"           </div>\n"
+"       %endif\n"
+"       <p></p>\n"
+"   </div>\n"
+"            "
+msgstr ""
+
+#. module: car_repair_maintenance_service
+#: model:mail.template,subject:car_repair_maintenance_service.email_template_car_ticket1
+msgid "${object.name} - ${object.subject} (Closed)"
+msgstr ""
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.external_layout_footer_car_req
+msgid "&amp;bull;"
+msgstr ""
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_invalid_car
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.thanks_mail_send_car
+msgid "&amp;times;"
+msgstr ""
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_invalid_car
+msgid ""
+",<br/>\n"
+"                                        Partner not exists for entered email. Please enter valid email or contact administrator to create new partner with this email!\n"
+"                                        <br/><br/>\n"
+"                                        Thanks"
+msgstr ""
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<b>Car Information</b>"
+msgstr "<b>Información del Carro</b>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<b>Client Information</b>"
+msgstr "<b>Información del Cliente</b>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<b>Other Information</b>"
+msgstr "<b>Otra Información</b>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.report_car_repair_req_lable
+msgid ""
+"<br/>\n"
+"\t                                <strong>Date: </strong>"
+msgstr ""
+"<br/>\n"
+"\t                                <strong>Fecha: </strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.report_car_repair_req_lable
+msgid ""
+"<br/>\n"
+"\t                                <strong>Discription: </strong>"
+msgstr ""
+"<br/>\n"
+"\t                                <strong>Descripción: </strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.report_car_repair_req_lable
+msgid ""
+"<br/>\n"
+"\t                                <strong>Model: </strong>"
+msgstr ""
+"<br/>\n"
+"\t                                <strong>Modelo: </strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.thanks_mail_send_car
+msgid ""
+"<br/><br/>\n"
+"                                        Your request number is"
+msgstr ""
+"<br/><br/>\n"
+"                                        Su número de orden es"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<small class=\"text-right\">Status:</small>"
+msgstr "<small class=\"text-right\">Estado:</small>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.successful_feedback_car
+msgid ""
+"<span class=\"hidden-xs\">Go Back</span>\n"
+"                                <span class=\"fa fa-long-arrow-left\"/>"
+msgstr ""
+"<span class=\"hidden-xs\">Regresar</span>\n"
+"                                <span class=\"fa fa-long-arrow-left\"/>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.successful_car_ticket_send
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_invalid_car
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.thanks_mail_send_car
+msgid ""
+"<span class=\"hidden-xs\">Go Back</span><span class=\"fa fa-long-arrow-"
+"left\"/>"
+msgstr ""
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.successful_feedback_car
+msgid ""
+"<strong> Your Feedback have been sent successfully.<br/>\n"
+"                                    Thank you,<br/>\n"
+"                                    Repair Team\n"
+"                                </strong>"
+msgstr ""
+"<strong> Sus comentarios se han enviado correctamente.<br/>\n"
+"                                    Thank you,<br/>\n"
+"                                    Repair Team\n"
+"                                </strong>"""
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Accompanying Items</strong>"
+msgstr "<strong>
+Elementos que lo acompañan</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Analytic Account  :</strong>"
+msgstr "<strong>Cuenta analítica  :</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.report_car_repair_req_lable
+msgid "<strong>Brand: </strong>"
+msgstr "<strong>Marca: </strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Brand</strong>"
+msgstr "<strong>Marca</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Car Category</strong>"
+msgstr "<strong>Categorá de Carro</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Car</strong>"
+msgstr "<strong>Carro</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.report_car_repair_req_lable
+msgid "<strong>Client: </strong>"
+msgstr "<strong>Cliente: </strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Client</strong>"
+msgstr "<strong>Cliente</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Close Date:</strong>"
+msgstr "<strong>Fecha de cierre:</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Color</strong>"
+msgstr "<strong>Color</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Company</strong>"
+msgstr "<strong>Compañía</strong>""
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Create Date:</strong>"
+msgstr "<strong>Crear Fecha:</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Customer:</strong>"
+msgstr "<strong>Cliente:</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Department  :</strong>"
+msgstr "<strong>Departamento  :</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Email :</strong>"
+msgstr "<strong>Correo electrónico:</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Email</strong>"
+msgstr "<strong>Correo electrónico</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Is Repaied ?</strong>"
+msgstr "<strong>Esta reparado ?</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Message and communication history</strong>"
+msgstr "<strong>Historial de mensajes y comunicaciones</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Model</strong>"
+msgstr "<strong>Modelo</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Nature of Service:</strong>"
+msgstr "<strong>Naturalezae del servicio:</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Phone :</strong>"
+msgstr "<strong>Teléfono :</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Phone</strong>"
+msgstr "<strong>Teléfono</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Priority:</strong>"
+msgstr "<strong>Prioridad:</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Problem:</strong>"
+msgstr "<strong>Problema:</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Project:</strong>"
+msgstr "<strong>Proyecto:</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Repair Date</strong>"
+msgstr "<strong>Fecha de reparación</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Repair Manager:</strong>"
+msgstr "<strong>Gerente de reparación:</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Repair Team :</strong>"
+msgstr "<strong>Equipo de reparación :</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Request Date</strong>"
+msgstr "<strong>Fecha de solicitud</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Technician :</strong>"
+msgstr "<strong>Técnico :</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Techniseal</strong>"
+msgstr "<strong>Tecnisismo</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>"<strong>Total de horas dedicadas a la reparación</strong>"""
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "<strong>Total Hours Spent:</strong>"
+msgstr "<strong>Total de horas dedicadas:</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Warranty</strong>"
+msgstr "<strong>Garantia</strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.report_car_repair_req_lable
+msgid "<strong>Year: </strong>"
+msgstr "<strong>Año: </strong>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "<strong>Year</strong>"
+msgstr "<strong>Año</strong>"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__access_warning
+msgid "Access warning"
+msgstr "Advertencia de acceso"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__accompanying_items
+msgid "Accompanying Items"
+msgstr "Elementos acompañantes"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_needaction
+msgid "Action Needed"
+msgstr "Acción necesaria"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__activity_state
+msgid "Activity State"
+msgstr "Estado de actividad"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Add an internal note..."
+msgstr "Agregar nota interna"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__analytic_account_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__analytic_account_id
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "Analytic Account"
+msgstr "Cuenta analítica"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Línea Analítica"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__state__assigned
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__state__assigned
+msgid "Assigned"
+msgstr "Asignado"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__user_id
+msgid "Assigned to"
+msgstr "Asignado a"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Attach Files"
+msgstr "Adjuntar archivos"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_attachment_count
+msgid "Attachment Count"
+msgstr "Recuento de archivos adjuntos"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__rating__average
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_feedback
+msgid "Average"
+msgstr "Promedio"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "Billable"
+msgstr "Facturable"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__brand
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_product_product__car_brand
+msgid "Brand"
+msgstr "Marca"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Car Brand"
+msgstr "Marca de carro"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Car Category"
+msgstr "Categoría de carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_diagnosys_action
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Car Diagnosys"
+msgstr "Diagnóstico de carro"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Car Images"
+msgstr "Imágenes de carro"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Car Information"
+msgstr "Información de carro"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Car Manufacturing Year"
+msgstr "Año de fabricacion de carro"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Car Model"
+msgstr "Modelo del carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_product_car_parts
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_car_part_product_action
+msgid "Car Parts"
+msgstr "Partes del carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_car_product_consume_part
+msgid "Car Product Consume Part"
+msgstr "Número de parte"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_car_repair_support
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_car_repair_support_requests
+#: model:ir.ui.menu,name:car_repair_maintenance_service.main_car_repair_support_main
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_calendar
+msgid "Car Repair"
+msgstr "Reparación de carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_car_repair_support
+msgid "Car Repair / Service"
+msgstr "Reparacion de carro / Servicio"
+
+#. module: car_repair_maintenance_service
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_item_car_repair_support
+msgid "Car Repair / Services"
+msgstr "Reparación de carro / Servicios"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_car_user_tree
+msgid "Car Repair Analysis"
+msgstr "Analísis de reparación de carro"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_view_task_car_form
+msgid "Car Repair Estimation"
+msgstr "Costo estimado de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_car_repair_estimation_lines
+msgid "Car Repair Estimation Lines"
+msgstr "Lineas de estimación de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:res.groups,name:car_repair_maintenance_service.group_car_repair_manager
+msgid "Car Repair Manager"
+msgstr "Gerente de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_car_repair_report
+#: model:mail.template,report_name:car_repair_maintenance_service.email_template_car_ticket1
+msgid "Car Repair Report"
+msgstr "Reporte de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_car_repair_report_requests
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.my_car_repair_requests_page
+msgid "Car Repair Requests"
+msgstr "Solicitudes de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_car_repair_support
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_account_analytic_line__car_support_request_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part__car_id
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "Car Repair Support"
+msgstr "Soporte de reparación de carros"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Car Repair Support Subject"
+msgstr "Asunto de soporte de repáración"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.actions.act_window,help:car_repair_maintenance_service.action_car_repair_support
+msgid "Car Repair Support Tree."
+msgstr "Soporte de reparación de automóviles"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_car_support_team
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__team_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__team_id
+msgid "Car Repair Team"
+msgstr "Equipo de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_item_car_support_team
+msgid "Car Repair Teams"
+msgstr "Equipos de reparación de carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_project_task__car_ticket_id
+msgid "Car Repair Ticket"
+msgstr "Comprobante de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_car_repair_type
+msgid "Car Repair Type"
+msgstr "Tipo de reparación de carro"
+
+#. module: car_repair_maintenance_service
+#: model:res.groups,name:car_repair_maintenance_service.group_car_repair_user
+msgid "Car Repair User/Technician"
+msgstr "Técnico/Usuario de reparación de carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_car_service_nature
+msgid "Car Service Nature"
+msgstr "Naturaleza de Servicio de carro"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Car Work Orders"
+msgstr "Ordenes de trabajo de carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_workorder_action
+msgid "Car WorkOrders"
+msgstr "Ordenes de trabajo de carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_product_car
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_car_product_action
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_car_product_main
+msgid "Cars"
+msgstr "Carros"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__category
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__category
+msgid "Category"
+msgstr "Categoría"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_account_analytic_line__billable
+msgid "Chargable?"
+msgstr "Cobrable"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.actions.act_window,help:car_repair_maintenance_service.action_product_car
+#: model_terms:ir.actions.act_window,help:car_repair_maintenance_service.action_product_car_parts
+msgid "Click to define a new product."
+msgstr "Click para definir nuevo producto"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__close_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__close_date
+msgid "Close Date"
+msgstr "Fecha de cierre"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__state__closed
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__state__closed
+msgid "Closed"
+msgstr "Cerrado"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_type__code
+msgid "Code"
+msgstr "Código"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__color
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_product_product__car_color
+msgid "Color"
+msgstr "Color"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_feedback
+msgid "Comment :"
+msgstr "Comentario"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__company_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: car_repair_maintenance_service
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_car_repair_configuration
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Create Car Diagnosys"
+msgstr "Crear diagnóstico de carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__request_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__request_date
+msgid "Create Date"
+msgstr "Crear cita"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_view_task_car_form
+msgid "Create Quotation"
+msgstr "Crear Cotización"
+
+#. module: car_repair_maintenance_service
+#: model:website.menu,name:car_repair_maintenance_service.support_page_add_car
+msgid "Create Repair / Service Request"
+msgstr "Crear solicitud de Reparación / Servicio"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Create Work Order"
+msgstr "Crear oden de trabajo"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part__create_uid
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__create_uid
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__create_uid
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_type__create_uid
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_service_nature__create_uid
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part__create_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__create_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__create_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_type__create_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_service_nature__create_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_requests
+msgid "Current stage of the task"
+msgstr "Etapa actual de la tarea"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_request_from
+msgid "Current stage of this task"
+msgstr "Etapa actual de esta tarea"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__partner_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__partner_id
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__comment
+msgid "Customer Comment"
+msgstr "Comentario de cliente"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__access_url
+msgid "Customer Portal URL"
+msgstr "URL del portal del cliente"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__rating
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Customer Rating"
+msgstr "Calificación del cliente"
+
+#. module: car_repair_maintenance_service
+#: code:addons/car_repair_maintenance_service/controllers/main.py:0
+#: code:addons/car_repair_maintenance_service/controllers/main_old.py:0
+#, python-format
+msgid ""
+"Customer has sent %s attachments to this Car repair ticket. Name of "
+"attachments are: "
+msgstr ""
+"El cliente ha enviado %s archivos adjuntos a este ticket de reparación. Nombre de "
+"los archivos adjuntos son: "
+
+#. module: car_repair_maintenance_service
+#: code:addons/car_repair_maintenance_service/controllers/main.py:0
+#: code:addons/car_repair_maintenance_service/controllers/main_old.py:0
+#, python-format
+msgid ""
+"Customer has sent %s attachments to this car repair ticket. Name of "
+"attachments are: "
+msgstr "El cliente ha enviado %s archivos adjuntos a este ticket de reparación. Nombre de "
+"los archivos adjuntos son: "
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__damage
+msgid "Damage"
+msgstr "Daño"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_requests
+msgid "Date"
+msgstr "Fecha"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_invalid_car
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.thanks_mail_send_car
+msgid "Dear"
+msgstr "Estimado"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__department_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__department_id
+msgid "Department"
+msgstr "Departamento"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__description
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "Description"
+msgstr "Descripción"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Details"
+msgstr "Detalles"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_view_task_diagnosis_car
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__project_task__car_task_type__diagnosys
+msgid "Diagnosys"
+msgstr "Diagnóstico"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part__display_name
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__display_name
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__display_name
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__display_name
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_type__display_name
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_service_nature__display_name
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__email
+msgid "Email"
+msgstr "Correo electronico"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.external_layout_footer_car_req
+msgid "Email:"
+msgstr "Correo electronico"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__email
+msgid "Emails"
+msgstr "Correos electronicos"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_view_task_car_form
+msgid "Estimation Repair"
+msgstr "Reparacion de estimacion"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__rating__excellent
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_feedback
+msgid "Excellent"
+msgstr "Excelente"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (canales)"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_partner_ids
+msgid "Seguidores (socios)"
+msgstr ""
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__category__functional
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__category__functional
+msgid "Functional"
+msgstr "Funcional"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "General Information"
+msgstr "Información general"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__rating__good
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_feedback
+msgid "Good"
+msgstr "Bien"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_search_view
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__priority__2
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__priority__2
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "High"
+msgstr "Alto"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "Hours"
+msgstr "Horas"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part__id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_type__id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_service_nature__id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team__id
+msgid "ID"
+msgstr "ID"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad de excepción"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__message_needaction
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si se marca, losmensajes nueos requieren su atencion"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__message_has_error
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si lo marca, algunos mensajes tienen un error de entrega"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Image 1"
+msgstr "Imagen 1"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Image 2"
+msgstr "Imagen 2"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Image 3"
+msgstr "Imagen 3"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Image 4"
+msgstr "Imagen 4"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Image 5"
+msgstr "Imagen 5"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__img1
+msgid "Images1"
+msgstr "Imágenes1"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__img2
+msgid "Images2"
+msgstr "Imágenes2"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__img3
+msgid "Images3"
+msgstr "Imágenes3"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__img4
+msgid "Images4"
+msgstr "Imágenes4"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__img5
+msgid "Images5"
+msgstr "Imágenes5"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_product_product__is_car
+msgid "Is Car"
+msgstr "Es carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team__is_team
+msgid "Is Default Team?"
+msgstr "Es el equipo predeterminado?"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_is_follower
+msgid "Is Follower"
+msgstr "Es seguidor"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__is_task_created
+msgid "Is Task Created ?"
+msgstr "Esta creada la tarea?"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__is_close
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__is_close
+msgid "Is Ticket Closed ?"
+msgstr "Esta cerrado el ticket?"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__journal_id
+msgid "Journal"
+msgstr "Diario"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part____last_update
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines____last_update
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report____last_update
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support____last_update
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_type____last_update
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_service_nature____last_update
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team____last_update
+msgid "Last Modified on"
+msgstr "Ultima modificación en"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part__write_uid
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__write_uid
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__write_uid
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_type__write_uid
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_service_nature__write_uid
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team__write_uid
+msgid "Last Updated by"
+msgstr "Ultima actualizacion por"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part__write_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__write_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__write_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_type__write_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_service_nature__write_date
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualizacion en"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team__leader_id
+msgid "Leader"
+msgstr "Lider"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "List of Damage"
+msgstr ""
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__lot_id
+msgid "Lot"
+msgstr "Lote"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__priority__0
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__priority__0
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Low"
+msgstr "Bajo"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Accesorio principal"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de entrega de mensaje"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__priority__1
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Middle"
+msgstr "Media"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__model
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_product_product__car_model
+msgid "Model"
+msgstr "Modelo"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Multiple files can be attach"
+msgstr "Multiples archivos pueden ser adjuntados"
+
+#. module: car_repair_maintenance_service
+#: model:website.menu,name:car_repair_maintenance_service.support_page_my_request_car
+msgid "My Requests"
+msgstr "Mis solicitudes"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_type__name
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_service_nature__name
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team__name
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "Name"
+msgstr "Nombre"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_nature_of_car_service
+msgid "Nature Of Car Service"
+msgstr "Naturaleza de servicio de carro"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__nature_of_service_id
+msgid "Nature Of service"
+msgstr "Naturaleza de servicio"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Nature of Service"
+msgstr "Naturaleza de servicio"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__state__needs_more_info
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__state__needs_more_info
+msgid "Needs More Info"
+msgstr "Necesita mas información"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__state__needs_reply
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__state__needs_reply
+msgid "Needs Reply"
+msgstr "Necesita respuesta"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__state__new
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__state__new
+msgid "New"
+msgstr "Nuevo"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Siguiente fecha limite de actividad"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__activity_summary
+msgid "Next Activity Summary"
+msgstr "Siguiente resumen de actividad"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__activity_type_id
+msgid "Next Activity Type"
+msgstr "Siguiente tipo de actividad"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "No"
+msgstr "No"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__priority__1
+msgid "Normal"
+msgstr "Normal"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__notes
+msgid "Notes"
+msgstr "Notas"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__name
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__name
+msgid "Number"
+msgstr "Número"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leidos"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.external_layout_footer_car_req
+msgid "Page:"
+msgstr "Página"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Personal Details"
+msgstr "Detalles personales"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__phone
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__phone
+msgid "Phone"
+msgstr "Teléfono"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.external_layout_footer_car_req
+msgid "Phone:"
+msgstr "Teléfono"
+
+#. module: car_repair_maintenance_service
+#: code:addons/car_repair_maintenance_service/models/ticket_task.py:0
+#, python-format
+msgid "Please add Estimation detail to create quotation!"
+msgstr "Por favor agregue detalles de estimación para crear cotización, "
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__rating__poor
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_feedback
+msgid "Poor"
+msgstr "Pobre"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__access_url
+msgid "Portal Access URL"
+msgstr "URL de acceso al portal"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__price
+msgid "Price"
+msgstr "Precio"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.report,name:car_repair_maintenance_service.print_support_request_car
+msgid "Print Car Repair Request"
+msgstr "Imprimir solicitud de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.report,name:car_repair_maintenance_service.repair_request_lable_report_car
+msgid "Print Lable"
+msgstr "Imprimir etiqueta"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__priority
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__priority
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_requests
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Priority"
+msgstr "Prioridad"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__problem
+msgid "Problem"
+msgstr "Problema"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_product_product
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part__product_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__product_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_product_consume_part_car
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__cosume_part_ids
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Product Consume Part"
+msgstr "Numero de parte"
+
+#. module: car_repair_maintenance_service
+#: code:addons/car_repair_maintenance_service/models/ticket_task.py:0
+#, python-format
+msgid "Product not defined on Estimation Repair Lines!"
+msgstr "Producto no definido en las lineas de estimación de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__project_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__project_id
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.view_car_repair_graph
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.view_car_repair_pivot
+msgid "Project Tasks"
+msgstr "Tareas de proyecto"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part__qty
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__qty
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_view_task_car_form
+msgid "Quotation"
+msgstr "Cotización"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_feedback
+msgid "Rating :"
+msgstr "Calificación"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Re Open"
+msgstr "Reabrir"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Reason for Repair"
+msgstr "Motivo de la reparación"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Reason for Repair in Details"
+msgstr "Motivo detallado de la reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__state__reopened
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__state__reopened
+msgid "Reopened"
+msgstr "Reabierto"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_repair_estimation_lines_car
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_project_task__car_repair_estimation_line_ids
+msgid "Repair Estimation Lines"
+msgstr "Lineas de estimación de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__team_leader_id
+msgid "Repair Manager"
+msgstr "Gerente de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_account_analytic_line__car_repair_request_id
+msgid "Repair Request"
+msgstr "Solicitud de reparación"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Repair Request Date"
+msgstr "Fecha de solicitud de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__repair_types_ids
+msgid "Repair Type"
+msgstr "Tipo de reparación"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Repaired?"
+msgstr "Reparado?"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Repairing Duration"
+msgstr "Duración de la reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_car_repair_report
+msgid "Reports"
+msgstr "Reportes"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_requests
+msgid "Request No"
+msgstr "Solicitud No"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__user_id
+msgid "Responsible Repair Technician"
+msgstr "Tecnico responsable de reparación"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de entrega de SMS"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__access_token
+msgid "Security Token"
+msgstr "Token de seguridad"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Select Service"
+msgstr "Seleccionar servicio"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_type__service_id
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Service"
+msgstr "Servicio"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_repair_type_car
+msgid "Service Type"
+msgstr "Tipo de servicio"
+
+#. module: car_repair_maintenance_service
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_item_repair_type
+msgid "Service Types"
+msgstr "Tipos de servicio"
+
+#. module: car_repair_maintenance_service
+#: model:ir.ui.menu,name:car_repair_maintenance_service.menu_item_nature_of_service
+msgid "Services"
+msgstr "Servicios"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+msgid "Set To Close"
+msgstr "Listo para cerrar"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__state__solution_suggested
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__state__solution_suggested
+msgid "Solution Suggested"
+msgstr "Solución sugerida"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_requests
+msgid "Stage"
+msgstr "Etapa"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__state
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__state
+msgid "State"
+msgstr "Estado"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr "Estado basado en actividades\n"
+"Vencido: la fecha de vencimiento ya ha pasado\n"
+"Hoy: Fecha de la actividad es hoy\n"
+"Planear: Actividades futuras."
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__subject
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__subject
+msgid "Subject"
+msgstr "Asunto"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_feedback
+msgid "Submit"
+msgstr "Enviar"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid ""
+"Submit\n"
+"                                    <span class=\"fa fa-long-arrow-right\"/>"
+msgstr ""
+"Enviar\n"
+"                                    <span class=\"fa fa-long-arrow-right\"/>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid ""
+"Submit your Repair / Service / Maintenance request by feeling below form."
+msgstr ""
+"Enviar su reparación / Servicio / Solicitud de manteminiento en el formulario de abajo."
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__category__support
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__category__support
+msgid "Support"
+msgstr "Soporte"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_car_support_team
+msgid "Support Team"
+msgstr "Equipo de soporte"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model,name:car_repair_maintenance_service.model_project_task
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__task_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__task_id
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_sale_order__car_task_id
+msgid "Task"
+msgstr "Tarea"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_report__team_leader_id
+msgid "Team Leader"
+msgstr "Lider de equipo"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_support_team__team_ids
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_team_car_form_view
+msgid "Team Members"
+msgstr "Miembros del equipo"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__category__technical
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__category__technical
+msgid "Technical"
+msgstr "Técnico"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.actions.act_window,help:car_repair_maintenance_service.action_product_car
+#: model_terms:ir.actions.act_window,help:car_repair_maintenance_service.action_product_car_parts
+msgid ""
+"The product form contains information to simplify the sale\n"
+"                process: price, notes in the quotation, accounting data,\n"
+"                procurement methods, etc."
+msgstr ""
+El formulario del producto contiene información para simplificar la venta\n"
+" proceso: precio, notas en la cotización, informacion fiscal,\n"
+" métodos de adquisición, etc.!  
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.actions.act_window,help:car_repair_maintenance_service.action_car_user_tree
+msgid ""
+"This report allows you to analyse the performance of your projects and "
+"users. You can analyse the quantities of tasks, the hours spent compared to "
+"the planned hours, the average number of days to open or close a task, etc."
+msgstr ""
+"Este informe le permite analizar el rendimiento de sus proyectos y"
+"usuarios. Puede analizar la cantidad de tareas, las horas dedicadas en comparación con"
+"las horas planificadas, el promedio de días para abrir o cerrar una tarea, etc."
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_support_team__is_team
+msgid ""
+"Tick this box to set this team as default support team when request come "
+"from website"
+msgstr ""
+"Marque esta casilla para configurar este equipo como equipo de soporte predeterminado cuando llegue la solicitud"
+"Desde sitio web"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__custome_client_user_id
+msgid "Ticket Created User"
+msgstr "Ticket de usuario creado"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__timesheet_line_ids
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_support_form_view
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "Timesheets"
+msgstr "Hoja de tiempo"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.display_car_repair_requests
+msgid "Title"
+msgstr "Titulo"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__total_consumed_hours
+msgid "Total Consumed Hours"
+msgstr "Total horas utilizadas"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__total_spend_hours
+msgid "Total Hours Spent"
+msgstr "Total de horas gastadas"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_project_task__car_task_type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo de actividad adicional registrada"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_product_consume_part__product_uom
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_estimation_lines__product_uom
+msgid "UOM"
+msgstr "UOM"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_unread
+msgid "Unread Messages"
+msgstr "Mensajes no leidos"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de mensajes no leidos"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__rating__very_good
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_feedback
+msgid "Very Good"
+msgstr "Muy bien"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__warranty
+msgid "Warranty"
+msgstr "Garantía"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__website_brand
+msgid "Website Brand"
+msgstr "Marca de sitio web"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes de sitio web"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__website_model
+msgid "Website Model"
+msgstr "Modelo de sitio web"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__website_year
+msgid "Website Year"
+msgstr "Año de sitio web"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,help:car_repair_maintenance_service.field_car_repair_support__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicación de sitio web"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.external_layout_footer_car_req
+msgid "Website:"
+msgstr "Sitio web"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__project_task__car_task_type__work_order
+msgid "Work Order"
+msgstr "Orden de trabajo"
+
+#. module: car_repair_maintenance_service
+#: model:ir.actions.act_window,name:car_repair_maintenance_service.action_view_task_workorder
+msgid "Work Orders"
+msgstr "Ordenes de trabajo"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_report__state__work_in_progress
+#: model:ir.model.fields.selection,name:car_repair_maintenance_service.selection__car_repair_support__state__work_in_progress
+msgid "Work in Progress"
+msgstr "Trabajo en progreso"
+
+#. module: car_repair_maintenance_service
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_car_repair_support__year
+#: model:ir.model.fields,field_description:car_repair_maintenance_service.field_product_product__car_year
+msgid "Year"
+msgstr "Año"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.support_report_car
+msgid "Yes"
+msgstr "Si"
+
+#. module: car_repair_maintenance_service
+#: code:addons/car_repair_maintenance_service/models/car_repair_support.py:0
+#, python-format
+msgid "You can not delete record which are not in draft state."
+msgstr "No se puede borrar registros que no esten en borrador"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.actions.act_window,help:car_repair_maintenance_service.action_product_car
+#: model_terms:ir.actions.act_window,help:car_repair_maintenance_service.action_product_car_parts
+msgid ""
+"You must define a product for everything you sell, whether it's\n"
+"                a physical product, a consumable or a service you offer to\n"
+"                customers."
+msgstr ""
+"
+"Debe definir un producto para todo lo que vende, ya sea \n"
+"un producto físico, un consumible o un servicio que ofrece a \n"
+" clientes."
+
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.car_repair_feedback
+msgid "Your Comment....."
+msgstr "Su comentario....."
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Your Email"
+msgstr "Su correo electrónico"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.successful_car_ticket_send
+msgid ""
+"Your Message/Attachments have been sent successfully.<br/><br/>\n"
+"                    Thank you,<br/><br/>"
+msgstr ""
+"Su mensaje / archivos adjuntos se han enviado correctamente. <br/> <br/> \ n"
+"Gracias, <br/> <br/>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Your Name"
+msgstr "Su nombre"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.website_car_repair_support_ticket
+msgid "Your Phone"
+msgstr "Su Telefóno"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.portal_my_car_repair_request
+msgid "Your Repair / Service Requests"
+msgstr "Su reparación / Solicitud de servicio"
+
+#. module: car_repair_maintenance_service
+#: code:addons/car_repair_maintenance_service/controllers/main.py:0
+#: code:addons/car_repair_maintenance_service/controllers/main_old.py:0
+#, python-format
+msgid "has send this feedback rating is %s and comment is %s"
+msgstr "ha enviado esta calificación  es%s y el comentario es %s"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.thanks_mail_send_car
+msgid ""
+"please note it for further communication and you will also receive email from our\n"
+"                                        repair team shortly, Please reply to that\n"
+"                                        email for feature conversation.\n"
+"                                        <br/><br/>\n"
+"                                        Thanks <br/>"
+msgstr ""
+"Por favor tómelo en cuenta para futuras comunicaciones, también recibirá un correo electrónico nuestro \n"
+"equipo de reparación en breve. Responda a \n"
+" Correo electrónico para futuras conversaciones.\n"
+"                                        <br/><br/>\n"
+"                                        Gracias <br/>"
+
+#. module: car_repair_maintenance_service
+#: model_terms:ir.ui.view,arch_db:car_repair_maintenance_service.successful_car_ticket_send
+msgid "show ticket"
+msgstr "Mostrar ticket"
+
+#. module: car_repair_maintenance_service
+#: model:res.groups,comment:car_repair_maintenance_service.group_car_repair_user
+msgid "the user will have access to his own data in the repair application."
+msgstr "El usuario tendra acceso a sus propios datos enla aplicacion de reparación"

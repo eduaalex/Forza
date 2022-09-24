@@ -1,0 +1,14 @@
+<odoo>
+	<data>		 
+    <record id="custom_citas_calendar_inheriti" model="ir.ui.view">
+    <field name="name">custom_citas_calendar.inheriti</field>
+    <field name="model">calendar.event</field>
+    <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+    <field name="arch" type="xml">      
+       <xpath expr="//field[@name='location']" position="after">
+           <field name="order_repar_id" readonly="1" force_save="1"/>
+        </xpath>
+    </field>
+   </record>
+	</data>
+</odoo>

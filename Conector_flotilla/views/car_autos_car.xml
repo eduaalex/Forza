@@ -1,0 +1,613 @@
+<odoo>
+  <data>
+
+    <record id="filtros_edit_conector_inheriti" model="ir.ui.view">
+      <field name="name">filtros edit conector inheriti</field>
+      <field name="model">car.repair.support</field>
+      <field name="inherit_id" ref="car_repair_maintenance_service.car_repair_support_search_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='subject']" position='after'>
+          <field name="placa" string="Placa"/>
+        </xpath>
+
+        <xpath expr="//field[@name='email']" position='after'>          
+          <field name="numero_serie" string="Serie"/>
+        </xpath>
+
+        <xpath expr="//field[@name='phone']" position='after'>          
+          <field name="numero_economico"/>
+        </xpath>
+
+      </field>
+   </record>
+
+
+ <record model="ir.actions.act_window" id="accion_presupuesto_car_repair">
+          <field name="name">presupuestos repair</field>
+          <field name="res_model">sale.order</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[('repair_origin_id','=',active_id)]</field>
+    </record>
+
+
+ <record model="ir.actions.act_window" id="accion_invoice_car_repair">
+          <field name="name">Facturas repair</field>
+          <field name="res_model">account.move</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[('repair_origin_id','=',active_id)]</field>
+    </record> 
+  
+
+  <record id="conector_form_edit_taller_mecanico_inheriti" model="ir.ui.view">
+    <field name="name">conector_form_edit_taller_mecanico.inheriti</field>
+    <field name="model">car.repair.support</field>
+    <field name="inherit_id" ref="car_repair_maintenance_service.car_repair_support_form_view"/>
+    <field name="arch" type="xml">     
+     
+
+       <xpath expr="//button[@name='create_car_diagnosys']" position="replace"> </xpath> 
+       <xpath expr="//button[@name='create_work_order']" position="replace">         
+          <button name="create_order_quo" string="Presupuesto" 
+            attrs="{'invisible':[('is_close','=',True)]}" 
+            groups="car_repair_maintenance_service.group_car_repair_manager" 
+            type="object" 
+            class="oe_highlight"/>   
+                 
+       </xpath>
+       <xpath expr="//button[@name='set_to_reopen']" position="replace"></xpath>
+       <xpath expr="//sheet[1]" position="replace">
+
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+               <button class="oe_stat_button"
+                       icon="fa-list-ol"
+                       help="Presupuestos"
+                       type="action"
+                       name="%(accion_presupuesto_car_repair)d">
+               <field string="Presupuestos"
+                name="count_reg"
+                widget="statinfo"
+                 /> 
+           </button>
+           <button class="oe_stat_button"
+                       icon="fa-list-ol"
+                       help="Facturas"
+                       type="action"
+                       name="%(accion_invoice_car_repair)d">
+               <field string="Facturas"
+                name="count_reg_fac"
+                widget="statinfo"
+                 /> 
+           </button>           
+          </div>
+
+
+          <div class="oe_title">
+                        <div class="oe_title">
+                        <h1>
+                           <group>
+                               <field name="field_filter" 
+                                string="Búsqueda rápida" 
+                                placeholder="serie/número económico/placa" 
+                                force_save="1"
+                                attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                          </group>
+                            <field name="name" readonly="1"/><br/>
+                            <field name="subject"                    
+                              invisible="1"  placeholder="Car Repair Support Subject"/>
+                             <field name="tipo_servicio" 
+                              force_save="1" 
+                              options="{'no_create': True, 'no_create_edit':True}"
+                              attrs="{'readonly': [('state', '=', 'closed')]}" 
+                              />
+                            <field name="is_task_created" invisible="1"/>
+                        </h1>
+                    </div>
+                    </div>
+
+              <group>
+             <group>
+                <field name="stage_id" invisible="1"/>
+                <field name="valida_cliente" invisible="1"/>
+                <field name="valida_autos" invisible="1"/>
+                <field name="partner_id" force_save="1" required="True" attrs="{'readonly': [('valida_cliente', '=', True)]}"/>
+                <field name="phone" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                <field name="email" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                <field name="flota_cliente" force_save="1" 
+                 attrs="{'readonly': [('valida_autos', '=', True)]}"/>
+                <field name="conductor" readonly="1" force_save="1"/>
+                <field name="telefono_conductor" string="" readonly="1" force_save="1"/>
+                <field name="email_conducto" string="" readonly="1" force_save="1"/>
+                <field name="titulo_conductor" string="" readonly="1" force_save="1"/>
+                <field name="puesto_conductor" string="" readonly="1" force_save="1"/>
+                <field name="credencial_numeros" string="" readonly="1" force_save="1"/>
+                <field name="foto_credencial" readonly="1" force_save="1"/>  
+                <field name="tarifa_id" invisible="1" force_save="1"/>  
+              </group>
+            <group>
+                
+                <field name="img_auto" widget="image" string="" class="oe_avatar"/>
+                <field name="origen_reparacion" 
+                    force_save="1" 
+                    attrs="{'readonly': ['|',('state', '=', 'closed'),('origen_cambio', '=', False)]}"
+                    options="{'no_create': True, 'no_create_edit':True}"/>                    
+                <field name="origen_cambio" string="Cambio de presupuestos" 
+                  attrs="{'invisible': ['|',('state', '=', 'closed'),('createorder','=',False)]}"/>                          
+                <field name="request_date" 
+                  force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"
+                  string="Fecha de Solicitud de reparación" 
+                  />
+                <field name="fecha_entrega" required="1" 
+                  force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"
+                  />
+                <field name="fecha_proximo_servicio"/>
+                <field name="cita_id"/> 
+                <field name="cita_activa" invisible="1"/>
+                <field name="cita_cancelada" invisible="1"/>  
+                <button
+                        string="Agendar cita"
+                        name="agendar_actividad"
+                        type="object"
+                        class="btn btn-link"
+                        attrs="{'invisible': [('cita_activa', '=', True)]}"/> 
+                
+                <button
+                        string="Cancelar cita"
+                        name="cancelar_actividad"
+                        type="object"
+                        class="btn btn-link"
+                        attrs="{'invisible': [('cita_cancelada', '=', True)]}"/>
+
+                <field name="kilometraje_maximo_proximo" force_save="1" 
+                  attrs="{'readonly':[('is_close','=',True)]}"/>
+                <field name="asesor_atiende_id" attrs="{'readonly': [('website_create', '=', False)]}"/>
+            </group>
+        </group>
+
+        <group string="Informacion del Vehículo">
+          <group>
+            <field name="year" readonly="1" force_save="1"/>
+            <field name="model" readonly="1" force_save="1"/>
+            <field name="color" readonly="1" force_save="1"/>
+            <field name="linea" readonly="1" force_save="1"/>
+            <field name="placa" readonly="1" force_save="1"/>
+            <field name="numero_serie" readonly="1" force_save="1"/>
+            <field name="numero_economico" string="Numero económico" readonly="1" force_save="1"/>
+          </group>
+          <group>
+            <field name="categoria_ids"  widget="many2many_tags" readonly="1" force_save="1"/>
+            <field name="numer_motor" readonly="1" force_save="1"/>
+            <field name="transmision" readonly="1" force_save="1"/>
+            <field name="kilometraje" string="Ultimo Kilometraje" readonly="1" force_save="1" placeholder="KM"/>
+            <field name="tipo_motor" readonly="1" force_save="1"/>
+            <field name="damage" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+          </group>
+        </group>
+
+         <group string="Solicitud WEB">
+          <group>
+            <field name="website_cliente_id" readonly="1" force_save="1"/>
+            <field name="website_year" readonly="1" force_save="1"/>
+            <field name="website_model" readonly="1" force_save="1"/>
+            <field name="website_brand" readonly="1" force_save="1"/>
+            <field name="website_placa" readonly="1" force_save="1"/>
+            <field name="website_numero_serie" readonly="1" force_save="1"/>
+          </group>
+          <group>
+            <field name="warranty" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+            <field name="orden_garantia_id" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible': [('warranty','=',False)]}"/>
+            <field name="close_date" readonly="1" force_save="1"/>
+            <!--<field name="total_spend_hours"/>-->
+            <field name="is_close" invisible="1"/>
+            <field name="website_problema_reportado" readonly="1" force_save="1"/>
+            <field name="website_naturaleza_servicio" readonly="1" force_save="1"/>
+            <field name="website_create" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+          </group>
+        </group>
+
+        <group string="Recepción de Vehículo">
+          <group>
+            <field name="nature_of_service_id" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+            <field name="priority" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+            <field name="comentario_recepcion" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+            <!--<field name="accompanying_items"/>-->
+          </group>
+          <group>
+            <field name="combutible_tanque" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+            <field name="problem" string="Problema reportado" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+             <field name="odometro_actual" required="1" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>                        
+          </group>
+        </group>
+        <!--selecion  de accesorios y compomentes-->
+         <group>
+           <group string="Inventario de accesorios">
+             <field name="inv_accesorios_id" widget="many2many_checkboxes"
+              force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+             <field name="articulo_valor" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+           </group>
+           <group string="Inventario de componentes mecánicos">
+             <field name="inv_com_mecanicos_id" widget="many2many_checkboxes"
+              force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+            
+           </group>
+         </group>
+
+         <!--seleccion para lista de daños-->
+         <group>
+           <group string="Daños Interior">
+             <!-- <field name="danos_internos_id" widget="many2many_checkboxes"/> -->
+             <field name="lista_danos_internos_ids" widget='section_one2many' 
+              force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}">
+                         <tree editable="bottom">
+                             <field name="danos_interior_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                             <field name="agregado_interior" invisible="1"/>          
+                              <field name="lista_danos_interior_id" invisible="1"/>   
+                         </tree>                                       
+                     </field> 
+
+             <field name="danos_encontrados_internos"
+              force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+           </group>
+           <group string="Daños Exterior">
+             <!-- <field name="danos_externos_id" widget="many2many_checkboxes"/> -->
+             <field name="lista_danos_externos_ids" widget='section_one2many' force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"> 
+                         <tree editable="bottom">
+                             <field name="danos_exterior_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                             <field name="agregado_exterior" invisible="1"/>
+                              <field name="lista_danos_exterio_id" invisible="1"/>   
+                         </tree>                                       
+                     </field> 
+             <field name="danos_encontrados_externos"
+              force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+           </group>
+         </group>
+
+        <group>
+          <group>
+            <field  name="img1" widget="image" string="Frente" class="oe_avatar"
+              force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+            <field  name="img2" widget="image" string="Lateral Conductor" class="oe_avatar"
+              force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+            <field  name="img5" widget="image" string="Trasero" class="oe_avatar"
+              force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+            </group>
+          <group>
+             <field  name="img3" widget="image" string="Lateral Copiloto" class="oe_avatar" 
+             force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+            <field  name="img4" widget="image" string="Interior" class="oe_avatar"
+              force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>     
+           
+          </group>
+        </group>
+
+        <group string="Asignación Técnica">
+            <group>
+                <field name="team_id" force_save="1"
+                 attrs="{'readonly': ['|',('state', '=', 'closed'),('createorder','=',False)]}"
+                  options="{'no_create': True, 'no_create_edit':True}"/>
+                <field name="createorder" invisible="1"/>
+                <field name="res_val_estado" invisible="1"/>
+                <field name="user_id" attrs="{'readonly':[('res_val_estado', '=', False)]}" 
+                  options="{'no_create': True, 'no_create_edit':True}"/>                
+                <field name="team_leader_id" readonly="1" force_save="1"/>
+                <field name="analytic_account_id" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                <field name="department_id" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+           </group>
+           <group>
+             
+           </group>
+        </group>
+        
+        <notebook>
+        
+                      <page string="Productos a consumir" >
+                            <field name="cosume_part_ids" 
+                              attrs="{'readonly': [('state', '=', 'closed')]}" 
+                                 nolabel="1">
+                                <tree editable="bottom" delete="false" >
+                                    <field name="auto_selec" invisible="1" force_save="1"/>
+                                    <field name="auto_checks" invisible="1" force_save="1"/>
+                                    <field name="product_id" force_save="1" attrs="{'readonly': ['|',('auto_selec', '=',True),('auto_checks', '=',True)]}"/>
+                                    <field name="qty" attrs="{'readonly': [('auto_selec', '=',True)]}" 
+                                      force_save="1"/>
+                                    <field name="costo" readonly="1" force_save="1"/>
+                                    <field name="product_uom" readonly="1" force_save="1"/>
+                                    <field name="presupuestado_id" readonly="1" force_save="1"/>
+                                    
+                                    <button string="-" class="btn btn-primary" type="object" 
+                                                         name="action_delete_product" />
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="total">
+                              <field name="currency_id" invisible="1"/>
+                              <field name="base_imponible" widget="monetary" readonly="True" force_save="1" options="{'currency_field': 'currency_id'}" />
+                              <field name="impuestos" widget="monetary" readonly="True" force_save="1" options="{'currency_field': 'currency_id'}"/>
+                              <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                  <label for="total"/>
+                                  <field name="total" widget="monetary" force_save="1" options="{'currency_field': 'currency_id'}" class="oe_subtotal_footer_separator" 
+                                    readonly="True"/>
+                              </div>
+                              
+                            </group>
+                            <button string="Agregar daños (sugerencias)" class="btn btn-warning" type="object" name="action_danos_product" 
+                              attrs="{'invisible': [('state', '=', 'closed')]}"/>
+                        </page>
+
+                        <page string="Diagnóstico">
+            <group>
+              <field name="diagnostico" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>                            
+            </group>
+            <group>
+              <button string="Envia a Asesor" class="btn btn-primary" type="object" 
+            name="action_actividad_asesor"
+             attrs="{'invisible': [('state', '=', 'closed')]}"/>  
+            </group>
+          </page>
+
+          <page string="Entrega de Vehículo">                    
+                    <group string="Líquidos y Fluidos"></group>
+                    <div>                     
+                     <field name="lista_liqudo_fluido_ids" 
+                      force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}">
+                         <tree editable="bottom" create="false" delete="false">
+                              <field name="nombre" readonly="1" force_save="1"/>
+                              <field name="icon_name" widget="image" width="20px" height="20px" readonly="1" force_save="1"/>
+                              <field name="revisado_bien"/>
+                              <field name="atecion_pronto"/>
+                              <field name="atencion_inmediata"/>
+                              <field name="no_inspecionada"/>
+                              <field name="lista_id" invisible="1"/>  
+                             
+                         </tree>                                       
+                     </field>                                                      
+                    
+                   </div> 
+                   <group string="Luces"></group>
+                   <div> 
+                      <field name="lista_luces_ids" 
+                        force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}">
+                         <tree editable="bottom" create="false" delete="false">
+                              <field name="nombre" readonly="1" force_save="1"/>
+                              <field name="icon_name" widget="image" width="20px" height="20px" readonly="1" force_save="1"/>
+                              <field name="revisado_bien"/>
+                              <field name="atecion_pronto"/>
+                              <field name="atencion_inmediata"/>
+                              <field name="no_inspecionada"/>
+                              <field name="lista_id" invisible="1"/>  
+                              
+                         </tree>                                       
+                     </field>
+                                       
+                   </div>                   
+            
+               <group string="Inspecciones Visibles y Funcionales"></group>
+               <div> 
+                      <field name="lista_inp_vin_ids"
+                        force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}">
+                         <tree editable="bottom" create="false" delete="false">
+                             <field name="nombre" readonly="1" force_save="1"/>
+                             <field name="icon_name" widget="image" width="20px" height="20px" readonly="1" force_save="1"/>
+                              <field name="revisado_bien"/>
+                              <field name="atecion_pronto"/>
+                              <field name="atencion_inmediata"/>
+                              <field name="no_inspecionada"/>
+                              <field name="lista_id" invisible="1"/>  
+                                
+                         </tree>                                       
+                     </field>
+                     
+                     
+                </div>
+                <group string="Neumáticos y Frenos delantero
+Derecho"></group>
+                 <div> 
+                      <field name="lista_fdd" 
+                        force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}">
+                         <tree editable="bottom" create="false" delete="false">
+                             <field name="nombre" readonly="1" force_save="1"/>
+                             <field name="icon_name" widget="image" width="20px" height="20px" readonly="1" force_save="1"/>
+                             <field name="revisado_bien"/>
+                              <field name="atecion_pronto"/>
+                              <field name="atencion_inmediata"/>
+                              <field name="no_inspecionada"/>
+                              <field name="lista_id" invisible="1"/> 
+                                 
+                         </tree>                                       
+                     </field>
+                     <div class="o_row">
+                         <label for="puesto_psi0"/>
+                         <field name="tipo_medidad_aire0" 
+                          force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                         <field name="puesto_psi0"
+                          force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                     </div>
+                     
+                </div>
+               
+            
+               <group string="Neumáticos y Frenos delantero
+Izquierdo"> </group>
+               <div> 
+                      <field name="lista_fdi" 
+                        force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}">
+                         <tree editable="bottom" create="false" delete="false">
+                             <field name="nombre" readonly="1" force_save="1"/>
+                             <field name="icon_name" widget="image" width="20px" height="20px" readonly="1" force_save="1"/>
+                             <field name="revisado_bien"/>
+                              <field name="atecion_pronto"/>
+                              <field name="atencion_inmediata"/>
+                              <field name="no_inspecionada"/>
+                              <field name="lista_id" invisible="1"/>  
+                               
+                         </tree>                                       
+                     </field>
+                     <div class="o_row">
+                        <label for="puesto_psi1"/>
+                         <field name="tipo_medidad_aire1" 
+                          force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                         <field name="puesto_psi1" 
+                          force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                     </div>
+                     
+                </div>
+                       <group string="Neumáticos y Frenos Trasero
+Derecho"></group>
+                <div> 
+                      <field name="lista_ftd" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}">
+                         <tree editable="bottom" create="false" delete="false">
+                             <field name="nombre" readonly="1" force_save="1"/>
+                             <field name="icon_name" widget="image" width="20px" height="20px" readonly="1" force_save="1"/>
+                             <field name="revisado_bien"/>
+                              <field name="atecion_pronto"/>
+                              <field name="atencion_inmediata"/>
+                              <field name="no_inspecionada"/>
+                             <field name="lista_id" invisible="1"/> 
+                                
+                         </tree>                                       
+                     </field>
+                     <div class="o_row">
+                         <label for="puesto_psi2"/>
+                         <field name="tipo_medidad_aire2" 
+                          force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                         <field name="puesto_psi2"
+                          force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                     </div>                     
+                </div>
+             
+                           <group string="Neumáticos y Frenos Trasero
+Izquierdo"></group>          
+                <div> 
+                      <field name="lista_fti" 
+                        force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}">
+                         <tree editable="bottom" create="false" delete="false">
+                             <field name="nombre" readonly="1" force_save="1"/>
+                             <field name="icon_name" widget="image" width="20px" height="20px" readonly="1" force_save="1"/>
+                             <field name="revisado_bien"/>
+                              <field name="atecion_pronto"/>
+                              <field name="atencion_inmediata"/>
+                              <field name="no_inspecionada"/>
+                              <field name="lista_id" invisible="1"/>  
+                              
+                         </tree>                                       
+                     </field>
+                     <div class="o_row">
+                        <label for="puesto_psi3" 
+                          force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                        <field name="tipo_medidad_aire3"
+                          force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                        <field name="puesto_psi3"
+                          force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                     </div>
+                     
+                </div>
+              <button string="Listo para Entrega" class="btn btn-primary" type="object" 
+            name="action_listo_entrega"  attrs="{'invisible': [('state', '=', 'closed')]}"/>  
+          </page>
+          
+          <page string="QR">
+             <group>
+                  <field name="url" widget="CopyClipboardChar" readonly="1" force_save="1"/>
+                  <field name="qr_code" string="QR"  widget='image' width="150" readonly="1" force_save="1"/>
+                </group>
+                <group>
+                  <button string="Generar QR"
+                        name="update_qr"
+                        type="object"
+                        class="oe_highlight" confirm="Actualizar de QR?"
+                         attrs="{'invisible': [('state', '=', 'closed')]}"/> 
+                </group>
+                <group>
+                  <field name="clausula" force_save="1" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                </group>
+              
+          </page>
+        </notebook>
+       
+
+        <field name="description" placeholder="Add an internal note..." attrs="{'readonly': [('state', '=', 'closed')]}"/>
+        
+        </sheet>
+
+      </xpath>
+      <xpath expr="//field[@name='message_follower_ids']" position="after">
+          <field name="activity_ids" widget="mail_activity"/>
+      </xpath>
+
+         
+    </field>
+   </record>
+
+   <!--KANBAN-->
+   <record id="conector_kanban_edit_mecanico_inheriti" model="ir.ui.view">
+    <field name="name">conector kanban_edit_mecanico.inheriti</field>
+    <field name="model">car.repair.support</field>
+    <field name="inherit_id" ref="car_repair_maintenance_service.car_repair_view_kanban"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='category']" position="after">
+          <field name="id"/>
+          <field name="stage_id" invisible="1"/>
+          <field name="img_auto"/>
+          <field name="partner_id"/>
+          <field name="brand"/>
+          <field name="year"/>
+          <field name="state"/>
+          <field name="website_create"/>
+      </xpath>
+
+       <xpath expr="//kanban" position="attributes">
+              <attribute name="default_group_by">stage_id</attribute>
+              <attribute name="records_draggable">0</attribute>
+              <attribute name="class">o_kanban_small_column o_kanban_project_tasks</attribute>
+        </xpath>
+
+
+     <xpath expr="//div[hasclass('oe_kanban_global_click')]" position="replace">
+        <div class="oe_kanban_global_click">
+          <div class="o_kanban_image">
+            <img t-att-src="kanban_image('car.repair.support', 'img_auto', record.id.raw_value)" alt="Vehicle"/>
+          </div>
+          <div class="oe_kanban_details">
+            <div class="o_kanban_tags_section">
+               <strong><field name="name"/></strong>
+            </div>
+            <div class="o_kanban_tags_section">
+               <field name="nature_of_service_id"/>
+               Responsable: <field name="user_id"/>
+            </div>
+            <div class="o_kanban_tags_section">
+               Cliente: <field name="partner_id"/>
+               
+          </div>
+           <div class="o_kanban_tags_section">
+               Placa: <field name="placa"/>
+          </div>
+          <div class="o_kanban_tags_section">
+            <field name="request_date"/>                    
+            
+          </div>
+
+          <div class="oe_kanban_details">
+            <strong>
+               <field name="state"/>
+            </strong>
+             <div attrs="{'invisible': [('website_create', '=', False)]}">
+               <strong style="color:blue;">Solicitud Website</strong>                  
+             </div>
+            
+          </div>
+
+          </div>
+        </div>
+
+      </xpath> 
+    
+
+
+    </field>
+   </record>
+
+
+  </data>
+</odoo>

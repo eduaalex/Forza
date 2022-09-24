@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<report
+            id="print_custom_request_car_entrega" 
+            model="car.repair.support"
+            report_type="qweb-pdf"
+            string="Reporte Entrega"
+            name="Conector_flotilla.custom_report_car_repair_entrega"
+            file="Conector_flotilla.custom_report_car_repair_entrega"
+            paperformat="Conector_flotilla.paperformat_formato_entrega"
+         />
+
+         <template id="custom_report_car_repair_entrega">
+         	<t t-foreach="docs" t-as="doc">
+         		<t t-call="web.html_container">
+         			<t t-call="web.internal_layout">
+                        <div  class="row">
+                            <div class="col-2">
+                                <t t-if="doc.company_id.logo">
+                                  <img t-att-src="'data:image/png;base64,%s' % to_text(doc.company_id.logo)" width="100px" height="100px"/>
+                                </t>
+                            </div>
+                            <div class="col-8">
+                                <h2><center> <span t-if="doc.name" t-esc="doc.name"></span></center></h2>
+                                <h1 style="text-align: center;">Entrega del Vehículo</h1>                                                     
+                            </div>
+                            <div class="col-2">
+                                <t t-if="doc.partner_id.image_1920">
+                                  <img t-att-src="'data:image/png;base64,%s' % to_text(doc.partner_id.image_1920)" width="100px" height="100px"/>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"> 
+                                <strong>Cliente:</strong><span t-if="doc.partner_id"><t t-esc="doc.partner_id.name"/></span><br/>
+                                <strong>Fecha de ingreso:</strong>
+                                <span t-if="doc.request_date">
+                                    <span t-esc="context_timestamp(doc.request_date).strftime('%d-%m-%Y %H:%M')"/>
+                                </span>
+                                <br/>
+                                <strong>Asesor:</strong>                                        
+                                <span t-if="doc.asesor_atiende_id">
+                                    <t t-esc="doc.asesor_atiende_id.name"/>
+                                </span>
+                                <br/>
+                                <strong>Técnico responsable:</strong>
+                                <span t-if="doc.user_id"><t t-esc="doc.user_id.name"/></span><br/>
+                            </div>
+                            <div class="col-4">
+                                <strong> Vehiculo del cliente:</strong>
+                                <span t-if="doc.flota_cliente">
+                                    <t t-esc="doc.flota_cliente.name"/>
+                                </span><br/>
+                                <strong>Serie:</strong>
+                                <span t-if="doc.numero_serie" >
+                                    <t t-esc="doc.numero_serie"/>
+                                </span><br/>
+                                <strong>Kilometraje actual:</strong>
+                                <span t-if="doc.kilometraje" 
+                                      t-options='{"widget": "float", "precision": 0}'
+                                      t-esc="doc.kilometraje">KM
+                                </span>
+                                <br/>
+                                <strong>Entrega prevista:</strong>
+                                <span t-if="doc.fecha_entrega">    
+                                    <span t-esc="context_timestamp(doc.request_date).strftime('%d-%m-%Y %H:%M')"/>                             
+                                </span>
+
+                            </div>
+
+                            <div class="col-4">
+                                 <strong>Próximo servicio:</strong>
+                                 <span t-if="doc.fecha_proximo_servicio">
+                                 <span t-esc="context_timestamp(doc.fecha_proximo_servicio).strftime('%d-%m-%Y %H:%M')"/>
+                                </span>
+                                 <br/>
+                                 <strong> Kilometraje máximo:</strong>
+                                 <span t-if="doc.kilometraje_maximo_proximo"
+                                       t-options='{"widget": "float", "precision": 0}' 
+                                       t-esc="doc.kilometraje_maximo_proximo">KM</span>
+                                 <br/>
+
+                                <strong>Presupuesto:</strong>
+                                <span t-if="doc.origen_reparacion" 
+                                      t-esc="doc.origen_reparacion.name">                                
+                                </span>
+                                <br/>
+                                <strong>Factura: </strong>
+                                <span t-if="doc.get_factura()" 
+                                      t-esc="doc.get_factura()">                                
+                                </span>
+                                <br/>                                
+                            </div>  
+
+
+                        </div>
+
+                        <div style="border: 1px solid #000000;"   class="row">
+                            <div t-foreach="doc.get_image_data()" t-as="o" class="col-3">
+                                <img t-att-src="'data:image/png;base64,%s' % to_text(o.icon_name)" width="20px" height="20px"/>
+                                <span t-esc="o.name"/>
+                            </div>                                             
+                        </div>
+
+                        <div class="row">                            
+                            <div style="border: 1px solid #000000;"  class="col-6">
+                                <center><strong>Líquidos y Fluidos</strong></center>
+                                
+                                <div t-foreach="doc.lista_liqudo_fluido_ids" t-as="o">
+                                    <img t-if="o.icon_name" t-att-src="'data:image/png;base64,%s' % to_text(o.icon_name)" width="20px" height="20px"/>&#32;&#32;
+                                    <t t-esc="o.nombre.name"/>
+                                </div>
+                             
+                            </div>
+                            <div style="border: 1px solid #000000;"  class="col-6">
+                                <center><strong>Luces</strong></center>
+                                
+                                <div t-foreach="doc.lista_luces_ids" t-as="o">
+                                    <img t-if="o.icon_name" t-att-src="'data:image/png;base64,%s' % to_text(o.icon_name)" width="20px" height="20px"/>&#32;&#32;
+                                    <t t-esc="o.nombre.name"/>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            
+                             <div style="border: 1px solid #000000;" class="col-6">
+                                <center><strong>Inspecciones Visibles y Funcionales</strong></center>
+                                <div t-foreach="doc.lista_inp_vin_ids" t-as="o">
+                                    <t t-if="o.id%2==0"> 
+                                       <img t-if="o.icon_name" t-att-src="'data:image/png;base64,%s' % to_text(o.icon_name)" width="20px" height="20px"/>&#32;&#32;
+                                       <t t-esc="o.nombre.nombre"/>
+                                    </t>
+                                </div>                            
+                            </div>
+                            <div style="border: 1px solid #000000;" class="col-6">
+                                <center><strong>Inspecciones Visibles y Funcionales</strong></center>
+                                <div t-foreach="doc.lista_inp_vin_ids" t-as="o">
+                                  <t t-if="o.id%2!=0">
+                                    <img t-if="o.icon_name" t-att-src="'data:image/png;base64,%s' % to_text(o.icon_name)" width="20px" height="20px"/>&#32;&#32;
+                                    <t t-esc="o.nombre.nombre"/>
+                                  </t>
+                                </div>                            
+                            </div>
+                                                        
+                        </div>
+                        <div class="row">
+                            <div style="border: 1px solid #000000;"  class="col-6">
+                                <center><strong>Neumáticos y Frenos Delantero Derecho</strong></center>
+                               
+                                <div t-foreach="doc.lista_fdd" t-as="o">
+                                    <img t-if="o.icon_name" t-att-src="'data:image/png;base64,%s' % to_text(o.icon_name)" width="20px" height="20px"/>&#32;&#32;
+                                    <t t-esc="o.nombre.nombre"/>
+                                </div>                              
+                                <span style="border: 1px solid #000000;">Puesto a 
+                                    <t t-esc="doc.puesto_psi0"/>
+                                    <t t-if="doc.tipo_medidad_aire0=='0'">
+                                       <span>PSI </span> 
+                                    </t>
+                                    <t t-if="doc.tipo_medidad_aire1=='1'">
+                                        <span>LIBRAS </span>
+                                    </t>
+                                    
+                                </span>
+                            </div>
+                            <div style="border: 1px solid #000000;"  class="col-6">                                
+                                <center><strong>Nuemáticos y Frenos Delantero Izquierdo</strong></center>
+                               
+                                <div t-foreach="doc.lista_fdi" t-as="o">
+                                    <img t-if="o.icon_name" t-att-src="'data:image/png;base64,%s' % to_text(o.icon_name)" width="20px" height="20px"/>&#32;&#32;
+                                    <t t-esc="o.nombre.nombre"/>
+                                </div>        
+                                <span style="border: 1px solid #000000;">Puesto a
+                                    <t t-esc="doc.puesto_psi1"/>
+                                    <t t-if="doc.tipo_medidad_aire1=='0'">
+                                       <span>PSI </span> 
+                                    </t>
+                                    <t t-if="doc.tipo_medidad_aire1=='1'">
+                                        <span>LIBRAS </span>
+                                    </t> 
+                                    
+                                </span>
+                                
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            
+                            <div style="border: 1px solid #000000;"  class="col-6">
+                                <center><strong>Neumáticos Y Frenos Trasero Derecho</strong></center>                               
+                                <div t-foreach="doc.lista_ftd" t-as="o">
+                                    <img t-if="o.icon_name" t-att-src="'data:image/png;base64,%s' % to_text(o.icon_name)" width="20px" height="20px"/>&#32;&#32;
+                                    <t t-esc="o.nombre.nombre"/>
+                                </div>                                
+                                <span style="border: 1px solid #000000;">Puesto a
+                                    <t t-esc="doc.puesto_psi2"/>
+                                    <t t-if="doc.tipo_medidad_aire2=='0'">
+                                       <span>PSI </span> 
+                                    </t>
+                                    <t t-if="doc.tipo_medidad_aire1=='1'">
+                                        <span>LIBRAS </span>
+                                    </t>                                     
+                                </span>
+                            </div>
+                            <div style="border: 1px solid #000000;" class="col-6">                                
+                                <center><strong>Neumáticos y Frenos Trasero Izquierdo</strong></center>                           
+                                <div t-foreach="doc.lista_fti" t-as="o">
+                                    <img t-if="o.icon_name" t-att-src="'data:image/png;base64,%s' % to_text(o.icon_name)" width="20px" height="20px"/>&#32;&#32;
+                                    <t t-esc="o.nombre.nombre"/>
+                                </div> 
+                               
+                                <span style="border: 1px solid #000000;">Puesto a
+                                    <t t-esc="doc.puesto_psi3"/> 
+                                    <t t-if="doc.tipo_medidad_aire3=='0'">
+                                       <span>PSI </span> 
+                                    </t>
+                                    <t t-if="doc.tipo_medidad_aire1=='1'">
+                                        <span>LIBRAS </span>
+                                    </t>                                     
+                                </span>
+                                
+                            </div>
+                        </div>                      
+                     
+                         <span><strong>Diagnóstico:</strong> <t t-esc="doc.diagnostico"/></span>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <style>
+                              .firma{ width: 100% !important; 
+                              height: 1px !important; 
+                              background: black !important; 
+                              position: absolute !important;  
+                              top: 10% !important;}
+
+                        </style>
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="firma"></div>                               
+                               <center>Asesór:<t t-esc="doc.asesor_atiende_id.name"/></center>
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="col-5">
+                                <div class="firma"></div>  
+                               <center>Nombre y firma del cliente</center>
+                            </div>                            
+                         </div>
+                    <br/>
+                    <style>
+                        
+                    </style>
+                    <div class="row">
+                            <div class="col-2">
+                               <t t-if="doc.qr_code">
+                                   <img t-att-src="'data:image/png;base64,%s' % to_text(doc.qr_code)" width="100px" height="100px"/>
+                               </t>
+                            </div>
+                            <div style="text-align: justify;" class="col-8">
+                                <br/>
+                                <br/>
+                                
+                                Teléfono: <span t-if="doc.company_id.phone" t-field="doc.company_id.phone"/> 
+                                Correo electrónico: <span t-if="doc.company_id.email" t-field="doc.company_id.email"/> 
+                                Web: <span t-if="doc.company_id.website" t-field="doc.company_id.website"/> 
+                                RFC: <span t-if="doc.company_id.vat" t-field="doc.company_id.vat"/> 
+                                <span t-if="doc.company_id.company_registry" 
+                                    t-field="doc.company_id.company_registry"/>
+                            </div>
+                            <div class="col-2"></div>
+                    </div>
+                        
+         			</t>
+         		</t>         		
+         	</t>
+         </template>
+		
+	</data>
+</odoo>

@@ -1,0 +1,37 @@
+<odoo>
+	<data>
+
+         <record model="ir.ui.view" id="placas_autos_historial_form_view">
+            <field name="name">placas autos historial_form_view</field>
+            <field name="model">placas.conductor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                           <field name="auto_placa_id"/>
+                           <field name="placa_nuevo"/>
+                           <field name="placa_anterior"/>
+                           <field name="fecha_cambio"/>
+                        </group>
+                   </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="placas_autos_historial_tree_view">
+            <field name="name">placas autos historial_tree_view</field>
+            <field name="model">placas.conductor</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="auto_placa_id"/>
+                   <field name="placa_nuevo"/>
+                   <field name="placa_anterior"/>
+                   <field name="fecha_cambio"/>                   
+                </tree>
+            </field>
+        </record>
+
+			
+	</data>
+</odoo>

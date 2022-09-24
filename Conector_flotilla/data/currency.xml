@@ -1,0 +1,9 @@
+<odoo>
+	<data noupdate="1">
+		<record id="currency_id_start" model="car_repair.tax">
+            <field name="tax">0.16</field>
+            <field name="currency_id">1</field>
+            
+        </record>
+	</data>
+</odoo>

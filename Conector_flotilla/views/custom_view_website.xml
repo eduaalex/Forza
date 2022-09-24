@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="custom_car_repair_autos_herencia" inherit_id="car_repair_maintenance_service.website_car_repair_support_ticket">
+
+ <xpath expr="//div[hasclass('row')]/div[7]" position="after">
+
+   <div t-attf-class="form-group #{error and 'placa' in error and 'has-error' or ''} col-lg-6">
+        <label class="control-label" for="placa">Placa</label>
+        <input type="text" class="form-control" name="placa" required="True" />
+  </div>
+  <div t-attf-class="form-group #{error and 'serie' in error and 'has-error' or ''} col-lg-6">
+        <label class="control-label" for="serie">Serie</label>
+        <input type="text" class="form-control" name="serie" />
+  </div> 
+  </xpath>
+
+  <xpath expr="//div[hasclass('row')]/div[2]" position="after">
+    <div t-attf-class="col-lg-6" id="auto_cliente">
+        <label class="control-label" for="auto_cliente">Autos</label>
+        <select id="auto_cliente"  name="auto_cliente" class="form-control">
+          <option value="">Selecciona tu vehículo o continua en caso de ser uno NUEVO</option>
+          <t t-foreach="auto_cliente or []" t-as="auto">
+            <option t-att-value="auto.id">
+              <t t-esc="auto.name"/>
+            </option>
+          </t>
+        
+         </select>   
+              
+      </div>
+    </xpath> 
+
+    <xpath expr="//div[hasclass('row')]/div[13]" position="after">
+        <input id="salida_check" name="salida_check" style="display:none"/>
+        <h1>Productos o Servicios Sugeridos</h1>
+         <table id="data_product" class="table">
+         <thead>
+           <tr>
+             <th style="display: none;" >ID</th>
+             <th></th>
+             <th>Producto/Servicio</th>
+             <th>Precio</th>           
+           </tr>
+         </thead>
+         <tbody id="data_autos">
+         </tbody>
+       </table> 
+    </xpath>
+
+</template>
+</odoo>
